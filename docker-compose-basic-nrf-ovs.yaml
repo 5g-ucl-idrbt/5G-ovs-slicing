@@ -452,6 +452,7 @@ services:
         command: bash -c "apt-get update && apt-get install -y net-tools && tail -f /dev/null"
     tomcat:
         hostname: tomcatserver
+        container_name: tomcat
         image: tomcat:9.0
         ports: 
           - 8888:8080   
