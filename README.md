@@ -57,12 +57,14 @@ cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
 
-### in spgwu ###
+## In spgwu 
 ```
+sudo docker exec -it oai-spgwu bash
 sysctl net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
+ip route del default via 192.168.70.129 dev eth0
 ip route add default via 10.0.0.2 dev <dev_name> 
-ip route del default via 192.168.70.129 dev eth0 
+ 
 ```
 ## Test
 ```
