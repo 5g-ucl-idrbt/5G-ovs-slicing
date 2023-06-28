@@ -36,7 +36,7 @@ sudo docker exec s1 ovs-vsctl add-port br0 <INTF1>
 sudo docker exec s1 ovs-vsctl add-port br0 <INTF2>
 sudo docker exec s1 ovs-vsctl set-fail-mode br0 secure
 ```
-   * Add IP to h1 and h2
+   * Add IP to oai-spgwu and tomcat
 ```
 C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec oai-spgwu ip a add 10.0.0.1/30 dev ${C1_IF}
@@ -56,15 +56,16 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
-* Test
-```
-sudo docker exec h1 ping -c3 10.0.0.2
-sudo docker exec h2 ping -c3 10.0.0.1
-```
+
 ### in spgwu ###
 ```
 sysctl net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
 ip route add default via 10.0.0.2 dev <dev_name> 
 ip route del default via 192.168.70.129 dev eth0 
+```
+## Test
+```
+sudo docker exec oai-spgwu ping -c3 10.0.0.2
+sudo docker exec tomcat ping -c3 10.0.0.1
 ```
