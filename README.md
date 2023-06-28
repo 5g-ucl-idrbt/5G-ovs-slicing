@@ -1,12 +1,12 @@
 # 5G-ovs-integration
-## refer these links to setup core (in VM) and gNB (bear metal)
+## Refer these links to setup core (in VM) and gNB (bear metal)
 core: https://github.com/subhrendu1987/oai-core
 gNB: https://github.com/subhrendu1987/oai-gnodeb-b210
 ## adding ovs file to oai-setup
 ```
 clone the repo and paste the docker-compose file and createLink.sh file in the oai-core/docker-compose path
 ``` 
-## in core
+## In core
 ```
 sudo docker pull openvswitch/ovs:2.11.2_debian
 sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
@@ -16,12 +16,12 @@ cd oai-core/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
-## in gnb
+## In gnb
 ```
 sudo docker compose -f ci-scripts/yaml_files/sa_b200_gnb/docker-compose.yml up -d
 sudo docker ps -a
 ```
-## in core
+## In core
 
    * Create Links
 ```
