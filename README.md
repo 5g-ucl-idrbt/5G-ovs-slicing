@@ -8,8 +8,17 @@ clone the repo and paste the docker-compose file in the oai-core/docker-compose 
 ``` 
 ## in core
 ```
+sudo docker pull openvswitch/ovs:2.11.2_debian
+sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
+sudo docker pull osrg/ryu
+sudo docker pull tomcat
 cd oai-core/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
+```
+## in gnb
+```
+sudo docker compose -f ci-scripts/yaml_files/sa_b200_gnb/docker-compose.yml up -d
+
 ```
 ### in spgwu ###
 ```
