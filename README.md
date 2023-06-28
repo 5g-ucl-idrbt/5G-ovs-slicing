@@ -23,10 +23,10 @@ sudo docker ps -a
 ```
 ## in core
 
-    * Create Links
+   * Create Links
 ```
 sudo bash createLink.sh oai-spgwu s1
-sudo bash createLink.sh h2 s1
+sudo bash createLink.sh tomcat s1
 ```
    * Create bridge in s1
 ```
@@ -38,12 +38,12 @@ sudo docker exec s1 ovs-vsctl set-fail-mode br0 secure
 ```
    * Add IP to h1 and h2
 ```
-C1_IF=$(sudo ip netns exec h1 ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
-sudo ip netns exec h1 ip a add 10.0.0.1/30 dev ${C1_IF}
-C2_IF=$(sudo ip netns exec h2 ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
-sudo ip netns exec h2 ip a add 10.0.0.2/30 dev ${C2_IF}
-sudo ip netns exec h1 ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
-sudo ip netns exec h2 ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
+C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
+sudo ip netns exec oai-spgwu ip a add 10.0.0.1/30 dev ${C1_IF}
+C2_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
+sudo ip netns exec tomcat ip a add 10.0.0.2/30 dev ${C2_IF}
+sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
+sudo ip netns exec tomcat ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
 ```
 
 * Add controller to the ovs
@@ -52,6 +52,7 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 ```
 * Inside the ryu container
 ```
+sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
