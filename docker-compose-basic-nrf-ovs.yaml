@@ -426,8 +426,8 @@ services:
         networks:
           ovscomm:
             ipv4_address: 172.18.0.3
-          public_net:
-            ipv4_address: 192.168.70.135
+          #public_net:
+            #ipv4_address: 192.168.70.135
         volumes_from:
           - ovsdb-server
         security_opt:
@@ -450,6 +450,11 @@ services:
           - NET_ADMIN
     #command: /bin/bash
         command: bash -c "apt-get update && apt-get install -y net-tools && tail -f /dev/null"
+    tomcat:
+        hostname: tomcatserver
+        image: tomcat:9.0
+        ports: 
+          - 8888:8080   
 
 ##############
 #    oai-speedtest:
