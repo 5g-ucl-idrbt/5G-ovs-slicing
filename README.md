@@ -71,7 +71,7 @@ ip route add default via 10.0.0.2 dev <dev_name>
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
 sudo docker exec tomcat ping -c3 10.0.0.1
 ```
-## Inside the ubuntu docker
+## Inside the tomcat docker
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
