@@ -27,6 +27,7 @@ sudo docker ps -a
 ```
 sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh tomcat s1
+sudo bash createLink.sh ubuntu1 s1
 ```
    * Create bridge in s1
 ```
@@ -34,6 +35,7 @@ sudo docker exec s1 ovs-vsctl add-br br0
 sudo ip netns exec s1 ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}'   ## List interface names; Use Outputs as inputs of next CMD separately
 sudo docker exec s1 ovs-vsctl add-port br0 <INTF1>
 sudo docker exec s1 ovs-vsctl add-port br0 <INTF2>
+sudo docker exec s1 ovs-vsctl add-port br0 <INTF3>
 sudo docker exec s1 ovs-vsctl set-fail-mode br0 secure
 ```
    * Add IP to oai-spgwu and tomcat
@@ -42,8 +44,12 @@ C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{
 sudo ip netns exec oai-spgwu ip a add 10.0.0.1/30 dev ${C1_IF}
 C2_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec tomcat ip a add 10.0.0.2/30 dev ${C2_IF}
+C3_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
+sudo ip netns exec ubuntu1 ip a add 10.0.0.3/30 dev ${C3_IF}
+
 sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec tomcat ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
+sudo ip netns exec ubuntu1 ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 ```
 
 * Add controller to the ovs
