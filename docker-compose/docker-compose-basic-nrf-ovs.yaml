@@ -427,8 +427,8 @@ services:
         networks:
           ovscomm:
             ipv4_address: 172.18.0.3
-          #public_net:
-            #ipv4_address: 192.168.70.135
+          public_net:
+            ipv4_address: 192.168.70.136
         volumes_from:
           - ovsdb-server
         security_opt:
