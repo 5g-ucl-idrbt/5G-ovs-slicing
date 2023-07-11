@@ -26,7 +26,7 @@ sudo docker ps -a
 ```
 sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh tomcat s1
-sudo bash createLink.sh ubuntu1 s1
+sudo bash createLink.sh router s1
 ```
    * Create bridge in s1
 ```
@@ -43,13 +43,13 @@ C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{
 sudo ip netns exec oai-spgwu ip a add 10.0.0.1/30 dev ${C1_IF}
 C2_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec tomcat ip a add 10.0.0.2/30 dev ${C2_IF}
-C3_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
-sudo ip netns exec ubuntu1 ip a add 10.0.0.3/30 dev ${C3_IF}
+C3_IF=$(sudo ip netns exec router ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
+sudo ip netns exec router ip a add 10.0.0.3/30 dev ${C3_IF}
 
 sudo ip netns exec oai-spgwu ip r add 10.0.0.3/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec tomcat ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
-sudo ip netns exec ubuntu1 ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
+sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 ```
 
 * Add controller to the ovs
@@ -77,7 +77,7 @@ ip route add default via 10.0.0.2 dev <dev_name>
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
 sudo docker exec tomcat ping -c3 10.0.0.1
 ```
-## Inside the tomcat docker
+## Inside the router docker
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
