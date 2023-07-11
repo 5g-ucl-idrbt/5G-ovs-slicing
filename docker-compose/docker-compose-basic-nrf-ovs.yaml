@@ -379,6 +379,18 @@ services:
         cap_add:
           - NET_ADMIN
 
+    ubuntu:
+        container_name: router
+        image: ubuntu
+        networks:
+          public_net:
+            ipv4_address: 192.168.70.140
+        privileged: true
+        cap_add:
+          - NET_ADMIN
+        command: tail -f /dev/null
+
+
 ##############
 #    oai-speedtest:
  #       image: openspeedtest:latest
