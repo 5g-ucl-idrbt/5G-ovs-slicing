@@ -124,3 +124,30 @@ sudo docker exec -it tomcat bash
 ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
+#### Testing with GNBSIM instead of physical USRP and UE
+```
+cd oai-cn5g-fed/docker-compose
+sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim
+sudo docker ps -a
+```
+## Ping tests and curl tests 
+```
+sudo docker exec -it gnbsim bash
+```
+```
+apt update
+apt install -y curl
+```
+Here 12.1.1.2 is the ip of the UE (we can get it by looking into amf logs)
+```
+ping -I 12.1.1.2 8.8.8.8
+ping -I 12.1.1.2 10.0.0.1
+ping -I 12.1.1.2 10.0.0.2
+ping -I 12.1.1.2 10.0.0.3
+
+```
+### checking the connectivity to the server (tomcat)
+```
+curl --interface 12.1.1.2 http://192.168.150.115:8888
+
+```
