@@ -10,7 +10,7 @@ git clone git@gitlab.eurecom.fr:oai/cn5g/oai-cn5g-fed.git
 ## Adding ovs file to oai-setup
 ```
 cd
-git clone
+git clone https://github.com/abhic137/5G-ovs-integration.git
 git branch -a
 git checkout developv2
 clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
