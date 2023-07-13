@@ -380,6 +380,7 @@ services:
           - NET_ADMIN
 
     ubuntu:
+        hostname: router
         container_name: router
         image: ubuntu
         networks:
