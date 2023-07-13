@@ -69,13 +69,15 @@ sudo docker exec -it oai-spgwu bash
 sysctl net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
 ip route del default via 192.168.70.129 dev eth0
-ip route add default via 10.0.0.2 dev <dev_name> 
+ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the internet through the router pc 
  
 ```
 ## Test to check if the ovs is properly configured
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
+sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec tomcat ping -c3 10.0.0.1
+sudo docker exec router ping -c3 10.0.0.1
 ```
 ## Inside the router docker
 ```
