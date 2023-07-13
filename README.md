@@ -72,6 +72,13 @@ ip route del default via 192.168.70.129 dev eth0
 ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the internet through the router pc 
  
 ```
+
+## Inside the router docker
+```
+sudo docker exec -it router bash
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
+```
 ## Test to check if the ovs is properly configured
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
@@ -79,13 +86,8 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec tomcat ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-## Inside the router docker
-```
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
-```
 ## Test to check if the UE is able to hit the internet and tomcat server
 ```
 ##in UE
-ping 8.8.8.8
-curl 192.168.138.224:8888
+ping 8.8.8.8 # to check the connectivity to the internet
+curl 192.168.138.224:8888 # to check the connectivity to the server
