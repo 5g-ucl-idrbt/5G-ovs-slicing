@@ -16,7 +16,7 @@ git branch -a
 git checkout developv2
 cd 5G-ovs-integration/docker-compose
 cp createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-compose
-clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
+
 ``` 
 ## In core
 ```
