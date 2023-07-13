@@ -126,6 +126,9 @@ sudo docker exec router ping -c3 10.0.0.1
 ```
 ##in UE
 ping 8.8.8.8 # to check the connectivity to the internet
+ping 10.0.0.1 # pinging spgwu
+ping 10.0.0.2 # pinging tomcat
+ping 10.0.0.3 # pingindg router
 curl 192.168.138.224:8888 # to check the connectivity to the server
 ```
 ## To verify that the UE is going through the router towards the internet
