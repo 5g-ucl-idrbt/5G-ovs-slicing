@@ -291,22 +291,105 @@ services:
         networks:
             public_net:
                 ipv4_address: 192.168.70.134
-    oai-ext-dn:
-        privileged: true
-        init: true
-        container_name: oai-ext-dn
-        image: oaisoftwarealliance/trf-gen-cn5g:latest
-        entrypoint: /bin/bash -c \
-              "ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0; ip route; sleep infinity"
-        command: ["/bin/bash", "-c", "trap : SIGTERM SIGINT; sleep infinity & wait"]
-        healthcheck:
-            test: /bin/bash -c "ip r | grep 12.1.1"
-            interval: 10s
-            timeout: 5s
-            retries: 5
+   # oai-ext-dn:
+    #    privileged: true
+     #   init: true
+      #  container_name: oai-ext-dn
+       # image: oaisoftwarealliance/trf-gen-cn5g:latest
+        #entrypoint: /bin/bash -c \
+         #     "ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0; ip route; sleep infinity"
+        #command: ["/bin/bash", "-c", "trap : SIGTERM SIGINT; sleep infinity & wait"]
+        #healthcheck:
+         #   test: /bin/bash -c "ip r | grep 12.1.1"
+          #  interval: 10s
+           # timeout: 5s
+            #retries: 5
+        #networks:
+         #   public_net:
+          #      ipv4_address: 192.168.70.135
+
+    ovsdb-server:
+        hostname: ovs-server
+        container_name: ovsdb-server
+        cap_add:
+          - NET_ADMIN
+          - SYS_MODULE
+          - SYS_NICE
         networks:
-            public_net:
-                ipv4_address: 192.168.70.135
+          ovscomm:
+            ipv4_address: 172.18.0.2
+        volumes:
+          - /lib/modules:/lib/modules
+          - /home/core/ovs/log:/var/log/openvswitch
+          - /home/core/ovs/var/lib/openvswitch:/var/lib/openvswitch
+          - /home/core/ovs/var/run/openvswitch:/var/run/openvswitch
+          - /home/core/ovs/etc/openvswitch:/etc/openvswitch
+        security_opt:
+          - label=disable
+        privileged: true
+        image: openvswitch/ovs:latest
+        command: ovsdb-server
+  #################
+    switch:
+        hostname: s1
+        container_name: s1
+        cap_add:
+          - NET_ADMIN
+          - SYS_MODULE
+          - SYS_NICE
+        networks:
+          ovscomm:
+            ipv4_address: 172.18.0.3
+          #public_net:
+            #ipv4_address: 192.168.70.140
+        volumes_from:
+          - ovsdb-server
+        security_opt:
+          - label=disable
+        privileged: true
+        image: openvswitch/ovs:latest
+        command: ovs-vswitchd
+    ryu:
+        hostname: ryu
+        container_name: ryu
+        image: osrg/ryu:latest
+        networks:
+          ovscomm:
+            ipv4_address: 172.18.0.4
+    #network_mode: "service:ovs-vswitchd"
+    #tty: true
+    #stdin_open: true
+    #privileged: true
+        cap_add:
+          - NET_ADMIN
+    #command: /bin/bash
+        command: bash -c "apt-get update && apt-get install -y net-tools && tail -f /dev/null"
+    tomcat:
+        hostname: tomcatserver
+        container_name: tomcat
+        image: tomcat:9.0
+        ports: 
+          - 8888:8080   
+        networks:
+          public_net:
+            ipv4_address: 192.168.70.135
+        privileged: true
+        cap_add:
+          - NET_ADMIN
+
+    ubuntu:
+        hostname: router
+        container_name: router
+        image: ubuntu
+        networks:
+          public_net:
+            ipv4_address: 192.168.70.140
+        privileged: true
+        cap_add:
+          - NET_ADMIN
+        command: tail -f /dev/null
+
+
 networks:
     # public_net:
     #     external:
