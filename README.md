@@ -66,6 +66,13 @@ ryu-manager --observe-links simple_switch.py
 ## In spgwu 
 ```
 sudo docker exec -it oai-spgwu bash
+```
+```
+apt update
+apt install -y iputils-ping
+apt install -y tcpdump
+apt install -y iproute2
+apt install -y iptables
 sysctl net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
 ip route del default via 192.168.70.129 dev eth0
@@ -76,6 +83,14 @@ ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the
 ## Inside the router docker
 ```
 sudo docker exec -it router bash
+```
+```
+apt update
+apt install -y iputils-ping
+apt install -y tcpdump
+apt install -y iproute2
+apt install -y iptables
+apt install -y net-tools
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
 ```
