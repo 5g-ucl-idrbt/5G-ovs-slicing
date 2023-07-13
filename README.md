@@ -1,13 +1,18 @@
 # 5G-ovs-integration
 
 ## Refer these links to setup core and gnbsim
-https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed
+for core: https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed
+for gnbsim: https://github.com/abhic137/OAI-5G-GNBSIM-SPGWU/blob/main/README.md  (follow this link to build gnbsim image)
 ```
 cd
 git clone git@gitlab.eurecom.fr:oai/cn5g/oai-cn5g-fed.git
 ```
 ## Adding ovs file to oai-setup
 ```
+cd
+git clone
+git branch -a
+git checkout developv2
 clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
 ``` 
 ## In core
