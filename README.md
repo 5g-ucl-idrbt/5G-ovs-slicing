@@ -100,6 +100,7 @@ apt install -y iptables
 apt install -y net-tools
 ```
 ```
+ip route del default via 192.168.70.129 dev eth0
 ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
 
 ```
