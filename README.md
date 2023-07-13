@@ -95,10 +95,12 @@ curl 192.168.138.224:8888 # to check the connectivity to the server
 ## To verify that the UE is going through the router towards the internet
 ```
 sudo docker exec -it router bash
-tcpdump -i <interface_name>
+ifconfig 
+tcpdump -i <interface_name> #interface starting with dcp 
 ```
 ## To verify that the UE is reaching the server
 ```
 sudo docker exec -it tomcat bash
-tcpdump -i <interface_name>
+ifconfig
+tcpdump -i <interface_name> #interface starting with dcp
 ```
