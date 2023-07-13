@@ -10,8 +10,7 @@ clone the repo and paste the docker-compose file and createLink.sh file in the o
 ```
 sudo docker pull openvswitch/ovs:2.11.2_debian
 sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
-sudo docker pull osrg/ryu
-sudo docker pull tomcat
+
 cd oai-core/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
@@ -27,6 +26,7 @@ sudo docker ps -a
 ```
 sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh tomcat s1
+sudo bash createLink.sh router s1
 ```
    * Create bridge in s1
 ```
@@ -34,6 +34,7 @@ sudo docker exec s1 ovs-vsctl add-br br0
 sudo ip netns exec s1 ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}'   ## List interface names; Use Outputs as inputs of next CMD separately
 sudo docker exec s1 ovs-vsctl add-port br0 <INTF1>
 sudo docker exec s1 ovs-vsctl add-port br0 <INTF2>
+sudo docker exec s1 ovs-vsctl add-port br0 <INTF3>
 sudo docker exec s1 ovs-vsctl set-fail-mode br0 secure
 ```
    * Add IP to oai-spgwu and tomcat
@@ -42,8 +43,13 @@ C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{
 sudo ip netns exec oai-spgwu ip a add 10.0.0.1/30 dev ${C1_IF}
 C2_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec tomcat ip a add 10.0.0.2/30 dev ${C2_IF}
+C3_IF=$(sudo ip netns exec router ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
+sudo ip netns exec router ip a add 10.0.0.3/30 dev ${C3_IF}
+
+sudo ip netns exec oai-spgwu ip r add 10.0.0.3/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec tomcat ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
+sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 ```
 
 * Add controller to the ovs
@@ -71,7 +77,7 @@ ip route add default via 10.0.0.2 dev <dev_name>
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
 sudo docker exec tomcat ping -c3 10.0.0.1
 ```
-## Inside the tomcat docker
+## Inside the router docker
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
