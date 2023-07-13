@@ -13,6 +13,8 @@ cd
 git clone https://github.com/abhic137/5G-ovs-integration.git
 git branch -a
 git checkout developv2
+cd 5G-ovs-integration/docker-compose
+cp 
 clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
 ``` 
 ## In core
