@@ -112,7 +112,7 @@ sudo docker exec tomcat ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
 
-#### Testing with GNBSIM instead of physical USRP and UE
+# Testing with GNBSIM instead of physical USRP and UE
 ```
 cd oai-cn5g-fed/docker-compose
 sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim
