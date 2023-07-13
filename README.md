@@ -19,13 +19,6 @@ cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
-## In gnb
-```
-sudo docker compose -f ci-scripts/yaml_files/sa_b200_gnb/docker-compose.yml up -d
-sudo docker ps -a
-```
-## In core
-
    * Create Links
 ```
 sudo bash createLink.sh oai-spgwu s1
@@ -110,24 +103,7 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec tomcat ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-## Test to check if the UE is able to hit the internet and tomcat server
-```
-##in UE
-ping 8.8.8.8 # to check the connectivity to the internet
-curl 192.168.138.224:8888 # to check the connectivity to the server
-```
-## To verify that the UE is going through the router towards the internet
-```
-sudo docker exec -it router bash
-ifconfig 
-tcpdump -i <interface_name> #interface starting with dcp 
-```
-## To verify that the UE is reaching the server
-```
-sudo docker exec -it tomcat bash
-ifconfig
-tcpdump -i <interface_name> #interface starting with dcp
-```
+
 #### Testing with GNBSIM instead of physical USRP and UE
 ```
 cd oai-cn5g-fed/docker-compose
@@ -155,3 +131,16 @@ ping -I 12.1.1.2 10.0.0.3
 curl --interface 12.1.1.2 http://192.168.150.115:8888
 
 ```
+## To verify that the UE is going through the router towards the internet
+```
+sudo docker exec -it router bash
+ifconfig 
+tcpdump -i <interface_name> #interface starting with dcp 
+```
+## To verify that the UE is reaching the server
+```
+sudo docker exec -it tomcat bash
+ifconfig
+tcpdump -i <interface_name> #interface starting with dcp
+```
+
