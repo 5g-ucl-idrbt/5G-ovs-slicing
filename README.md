@@ -78,6 +78,7 @@ apt install -y iptables
 sysctl net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
 ip route del default via 192.168.70.129 dev eth0
+ifconfig #copy the port name starting with dcp and paste it in the <dev_name> in nextline
 ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the internet through the router pc 
  
 ```
