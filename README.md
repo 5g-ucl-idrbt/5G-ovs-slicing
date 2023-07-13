@@ -82,7 +82,23 @@ ifconfig #copy the port name starting with dcp and paste it in the <dev_name> in
 ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the internet through the router pc 
  
 ```
+## Inside the tomcat docker
+```
+sudo docker exec -it tomcat bash
+```
+```
+apt update
+apt install -y iputils-ping
+apt install -y tcpdump
+apt install -y iproute2
+apt install -y iptables
+apt install -y net-tools
+```
+```
+ip route del default via 192.168.70.129 dev eth0
+ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
 
+```
 ## Inside the router docker
 ```
 sudo docker exec -it router bash
