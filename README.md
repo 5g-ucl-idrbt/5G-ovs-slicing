@@ -129,11 +129,13 @@ sudo docker exec router ping -c3 10.0.0.1
 ```
 
 # Testing with GNBSIM instead of physical USRP and UE
+# For attaching 1 gNB and 1 UE
 ```
 cd oai-cn5g-fed/docker-compose
 sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim
 sudo docker ps -a
 ```
+
 ## Ping tests and curl tests 
 ```
 sudo docker exec -it gnbsim bash
@@ -153,6 +155,12 @@ ping -I 12.1.1.2 10.0.0.3
 ### checking the connectivity to the server (tomcat)
 ```
 curl --interface 12.1.1.2 http://192.168.150.115:8888
+
+```
+# For attaching 2 gnbs and 2 Ues respectively
+```
+sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim gnbsim2
+sudo docker ps -a
 
 ```
 ## To verify that the UE is going through the router towards the internet
