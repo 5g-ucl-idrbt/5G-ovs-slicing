@@ -172,7 +172,11 @@ To know the Ip of the UEs
 sudo docker logs gnbsim
 sudo docker logs gnbsim2
 ```
-ping tests (here 12.1.1.3 and 12.1.1.4 are the UE IPs respectively it may differ for you) 
+To check if the devices are connected to core
+```
+sudo docker logs --follow oai-amf
+```
+Ping tests (here 12.1.1.3 and 12.1.1.4 are the UE IPs respectively it may differ for you) 
 ```
 sudo docker exec gnbsim2 ping -I 12.1.1.3 8.8.8.8
 sudo docker exec gnbsim ping -I 12.1.1.4 8.8.8.8
