@@ -178,19 +178,19 @@ sudo docker logs --follow oai-amf
 ```
 Ping tests (here 12.1.1.3 and 12.1.1.4 are the UE IPs respectively it may differ for you) 
 ```
-sudo docker exec gnbsim2 ping -I 12.1.1.3 8.8.8.8
-sudo docker exec gnbsim ping -I 12.1.1.4 8.8.8.8
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 8.8.8.8
+sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 8.8.8.8
 ```
 ```
-sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.1
-sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.2
-sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.3
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.1
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.2
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.3
 
 ```
 ```
-sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.1
-sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.2
-sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.3
+sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.1
+sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.2
+sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.3
 ```
 ## To verify that the UE is going through the router towards the internet
 ```
