@@ -135,6 +135,10 @@ cd oai-cn5g-fed/docker-compose
 sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim
 sudo docker ps -a
 ```
+For getting the IP of UE
+```
+sudo docker logs gnbsim
+```
 
 ## Ping tests and curl tests 
 ```
@@ -144,7 +148,7 @@ sudo docker exec -it gnbsim bash
 apt update
 apt install -y curl
 ```
-Here 12.1.1.2 is the ip of the UE (we can get it by looking into amf logs)
+Here 12.1.1.2 is the ip of the UE (we can get it by looking into amf logs or in gnbsim logs)
 ```
 ping -I 12.1.1.2 8.8.8.8
 ping -I 12.1.1.2 10.0.0.1
@@ -161,7 +165,28 @@ curl --interface 12.1.1.2 http://192.168.150.115:8888
 ```
 sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim gnbsim2
 sudo docker ps -a
+```
+To know the Ip of the UEs
 
+```
+sudo docker logs gnbsim
+sudo docker logs gnbsim2
+```
+ping tests (here 12.1.1.3 and 12.1.1.4 are the UE IPs respectively it may differ for you) 
+```
+sudo docker exec gnbsim2 ping -I 12.1.1.3 8.8.8.8
+sudo docker exec gnbsim ping -I 12.1.1.4 8.8.8.8
+```
+```
+sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.1
+sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.2
+sudo docker exec gnbsim2 ping -I 12.1.1.3 10.0.0.3
+
+```
+```
+sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.1
+sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.2
+sudo docker exec gnbsim ping -I 12.1.1.4 10.0.0.3
 ```
 ## To verify that the UE is going through the router towards the internet
 ```
