@@ -208,3 +208,7 @@ ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
 
+# For stopping the processes
+```
+
+```
