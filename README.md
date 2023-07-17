@@ -210,5 +210,8 @@ tcpdump -i <interface_name> #interface starting with dcp
 
 # For stopping the processes
 ```
+sudo docker compose -f docker-compose-gnbsim.yaml down
+
+sudo docker compose docker-compose-basic-nrf-ovs.yaml down
 
 ```
