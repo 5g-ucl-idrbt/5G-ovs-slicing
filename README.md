@@ -1,8 +1,9 @@
 # 5G-ovs-integration
 
 ## Refer these links to setup core and gnbsim
-for core: https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed
-for gnbsim: https://github.com/abhic137/OAI-5G-GNBSIM-SPGWU/blob/main/README.md  (follow this link to build gnbsim image)
+In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 we are using version 1.5.1 from master branch.
+for core: ```https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed``` 
+for gnbsim: ```https://github.com/abhic137/OAI-5G-GNBSIM-SPGWU/blob/main/README.md```  (follow this link to build gnbsim image)
 ```
 cd
 git clone https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed.git
@@ -12,6 +13,7 @@ Clone the repo and paste the docker-compose file and createLink.sh file in the o
 ```
 cd
 git clone https://github.com/abhic137/5G-ovs-integration.git
+cd 5G-ovs-integration
 git branch -a
 git checkout developv2
 cd 5G-ovs-integration/docker-compose
@@ -22,7 +24,8 @@ cp createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-compose
 ```
 sudo docker pull openvswitch/ovs:2.11.2_debian
 sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
-
+```
+```
 cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
