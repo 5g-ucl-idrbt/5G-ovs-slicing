@@ -381,7 +381,7 @@ services:
   
     
     ubuntuserv:
-        hostname: server
+        hostname: tomcatserver
         container_name: tomcat
         image: ubuntu
         networks:
