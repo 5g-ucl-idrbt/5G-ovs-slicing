@@ -364,19 +364,34 @@ services:
           - NET_ADMIN
     #command: /bin/bash
         command: bash -c "apt-get update && apt-get install -y net-tools && tail -f /dev/null"
-    tomcat:
-        hostname: tomcatserver
+######################################
+    #tomcat:
+     #   hostname: tomcatserver
+      #  container_name: tomcat
+       # image: tomcat:9.0
+        #ports: 
+         # - 8888:9000  
+        #networks:
+         # public_net:
+          #  ipv4_address: 192.168.70.135
+       # privileged: true
+        #cap_add:
+         # - NET_ADMIN
+######################################
+  
+    
+    ubuntuserv:
+        hostname: server
         container_name: tomcat
-        image: tomcat:9.0
-        ports: 
-          - 8888:9000  
+        image: ubuntu
         networks:
           public_net:
             ipv4_address: 192.168.70.135
         privileged: true
         cap_add:
           - NET_ADMIN
-
+        command: tail -f /dev
+    
     ubuntu:
         hostname: router
         container_name: router
