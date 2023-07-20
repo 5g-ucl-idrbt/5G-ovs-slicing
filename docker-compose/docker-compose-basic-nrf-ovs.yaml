@@ -369,7 +369,7 @@ services:
         container_name: tomcat
         image: tomcat:9.0
         ports: 
-          - 8888:8080   
+          - 8888:9000  
         networks:
           public_net:
             ipv4_address: 192.168.70.135
