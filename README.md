@@ -1,6 +1,6 @@
 # 5G-ovs-integration
 ## Refer these links to setup core (in VM) and gNB (bear metal)
-[core:](https://github.com/subhrendu1987/oai-core)
+[core:](https://github.com/subhrendu1987/oai-core) <br>
 [gNB:](https://github.com/subhrendu1987/oai-gnodeb-b210)
 ## Adding ovs file to oai-setup
 ```
