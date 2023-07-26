@@ -1,7 +1,7 @@
 # 5G-ovs-integration
 ## Refer these links to setup core (in VM) and gNB (bear metal)
-[core:](https://github.com/subhrendu1987/oai-core) <br>
-[gNB:](https://github.com/subhrendu1987/oai-gnodeb-b210)
+* [core:](https://github.com/subhrendu1987/oai-core)
+* [gNB:](https://github.com/subhrendu1987/oai-gnodeb-b210)
 ## Adding ovs file to oai-setup
 ```
 clone the repo and paste the docker-compose file and createLink.sh file in the oai-core/docker-compose path
