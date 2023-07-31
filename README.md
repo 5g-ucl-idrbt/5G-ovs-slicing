@@ -103,8 +103,8 @@ apt install -y iptables
 apt install -y net-tools
 ```
 ```
-ip route del default via 192.168.70.129 dev eth0
-ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
+ifconfig # copy the dcp dev name
+ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 
 ```
 ## Inside the router docker
@@ -120,8 +120,9 @@ apt install -y iptables
 apt install -y net-tools
 ```
 ```
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-ip route add 12.1.1.0/24 via 192.168.70.134 dev eth0
+ifconfig # copy the dcp dev name
+ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
+
 ```
 ## Test to check if the ovs is properly configured
 ```
