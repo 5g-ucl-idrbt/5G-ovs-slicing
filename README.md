@@ -15,7 +15,7 @@ cd
 git clone https://github.com/abhic137/5G-ovs-integration.git
 cd 5G-ovs-integration
 git branch -a
-git checkout developv2
+git checkout developv3
 cd 5G-ovs-integration/docker-compose
 cp createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-compose
 
