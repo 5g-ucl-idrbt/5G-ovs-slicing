@@ -131,7 +131,14 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec tomcat ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
+# hosting python server in tomcatserver docker:
+```
+sudo docker exec -it tomcat bash
 
+python -m http.server 8000
+
+
+```
 # Testing with GNBSIM instead of physical USRP and UE
 # For attaching 1 gNB and 1 UE
 ```
@@ -159,6 +166,10 @@ ping -I 12.1.1.2 10.0.0.1
 ping -I 12.1.1.2 10.0.0.2
 ping -I 12.1.1.2 10.0.0.3
 
+```
+### checking connectivity with ther tomcat server (Python server)
+```
+curl --interface 12.1.1.2 http://10.0.0.2:8888
 ```
 ### checking the connectivity to the server (tomcat)
 ```
