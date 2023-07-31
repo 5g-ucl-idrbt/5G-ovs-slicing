@@ -384,9 +384,9 @@ services:
         hostname: tomcatserver
         container_name: tomcat
         image: ubuntu
-        networks:
-          public_net:
-            ipv4_address: 192.168.70.135
+      #  networks:
+        #  public_net:
+         #   ipv4_address: 192.168.70.135
         privileged: true
         cap_add:
           - NET_ADMIN
@@ -396,9 +396,9 @@ services:
         hostname: router
         container_name: router
         image: ubuntu
-        networks:
-          public_net:
-            ipv4_address: 192.168.70.140
+     #   networks:
+      #    public_net:
+       #     ipv4_address: 192.168.70.140
         privileged: true
         cap_add:
           - NET_ADMIN
