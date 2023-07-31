@@ -131,11 +131,11 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec tomcat ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-# hosting python server in tomcatserver docker:
+# Hosting python server in tomcat docker:
 ```
 sudo docker exec -it tomcat bash
 
-python -m http.server 8000
+python3 -m http.server 8888
 
 
 ```
