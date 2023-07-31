@@ -390,7 +390,7 @@ services:
         privileged: true
         cap_add:
           - NET_ADMIN
-        command: tail -f /dev
+        command: tail -f /dev/null
     
     ubuntu:
         hostname: router
