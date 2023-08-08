@@ -90,6 +90,8 @@ sudo docker exec server apt install -y tcpdump
 sudo docker exec server apt install -y iproute2
 sudo docker exec server apt install -y iptables
 sudo docker exec server apt install -y net-tools
+sudo docker exec server apt-get install -y python3
+sudo docker exec server apt install -y wget
 sudo docker exec server ip route del default via 192.168.70.129 dev eth0
 sudo ip netns exec server ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C2_IF}
 echo "**************************SERVER CONFIGURATION IS DONE************************"
