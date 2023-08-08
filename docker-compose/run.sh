@@ -82,4 +82,13 @@ sudo ip netns exec oai-spgwu ip route add default via 10.0.0.3 dev ${C1_IF}
 #sudo docker exec <container_name_or_id> sh -c 'command1 && command2 && command3'
 echo "*************************SPGWU CONFIGURATION IS DONE*******************************"
 
+#server configs
+sudo docker exec server apt install -y iputils-ping
+sudo docker exec server apt install -y tcpdump
+sudo docker exec server apt install -y iproute2
+sudo docker exec server apt install -y iptables
+sudo docker exec server apt install -y net-tools
+sudo docker exec server ip route del default via 192.168.70.129 dev eth0
+sudo ip netns exec router ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C2_IF}
+
 #github:abhic137
