@@ -41,7 +41,7 @@ C2_IF=$(sudo ip netns exec server ifconfig -a | grep -E "dcp.*" | awk -F':' '{pr
 sudo ip netns exec server ip a add 10.0.0.2/24 dev ${C2_IF}
 C3_IF=$(sudo ip netns exec router ifconfig -a | grep -E "dcp.*" | awk -F':' '{print $1}')
 sudo ip netns exec router ip a add 10.0.0.3/24 dev ${C3_IF}
-echo "***************************IPS ARE ADDED TO SPGWU,SERVER & ROUTEr **************************"
+echo "***************************IPS ARE ADDED TO SPGWU,SERVER & ROUTER **************************"
 
 sudo ip netns exec oai-spgwu ip r add 10.0.0.3/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
@@ -53,7 +53,14 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 
 echo "***********************RYU CONTROLLER IS SET ************************"
 
-
+#spgwu configs
+sudo docker exec oai-spgwu sysctl net.ipv4.ip_forward=1
+sudo docker exec oai-spgwu iptables -P FORWARD ACCEPT
+sudo docker exec oai-spgwu ip route del default via 192.168.70.129 dev eth0
+sudo docker exec oai-spgwu
+sudo docker exec oai-spgwu
+sudo docker exec oai-spgwu
+sudo ip netns exec oai-spgwu ip route add default via 10.0.0.3 dev ${C1_IF}
 #sudo docker exec <container_name_or_id> sh -c 'command1 && command2 && command3'
 
 #github:abhic137
