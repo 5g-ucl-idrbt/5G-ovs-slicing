@@ -23,12 +23,12 @@ sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh server s1
 sudo bash createLink.sh router s1
 echo "========================================================================================================="
-echo "***************LINKS ARE CREATED**************"
+echo "*************** LINKS ARE CREATED **************"
 echo "========================================================================================================="
 # del bridge in s1 if it already exits
 sudo docker exec s1 ovs-vsctl del-br br0
 echo "========================================================================================================="
-echo "********************CHECKING/DELETING EXISTING BRIDGE********************"
+echo "******************** CHECKING/DELETING EXISTING BRIDGE ********************"
 echo "========================================================================================================="
 # creating bridge adding ports to bridge
 BRIDGE_NAME="br0"
@@ -42,7 +42,7 @@ done
 
 sudo docker exec s1 ovs-vsctl set-fail-mode $BRIDGE_NAME secure
 echo "========================================================================================================="
-echo "*********************BRIDGE IS CREATED AND PORTS ARE ADDED************************"
+echo "********************* BRIDGE IS CREATED AND PORTS ARE ADDED ************************"
 echo "========================================================================================================="
 
 
@@ -62,7 +62,7 @@ sudo ip netns exec server ip a add 10.0.0.2/24 dev ${C2_IF}
 C3_IF=$(sudo ip netns exec router ifconfig -a | grep -E "dcp.*" | awk -F':' '{print $1}')
 sudo ip netns exec router ip a add 10.0.0.3/24 dev ${C3_IF}
 echo "========================================================================================================="
-echo "***************************IPS ARE ADDED TO SPGWU,SERVER & ROUTER **************************"
+echo "*************************** IPS ARE ADDED TO SPGWU,SERVER & ROUTER **************************"
 echo "========================================================================================================="
 
 sudo ip netns exec oai-spgwu ip r add 10.0.0.3/32 via 0.0.0.0 dev ${C1_IF}
@@ -70,13 +70,13 @@ sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec server ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
 sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 echo "========================================================================================================="
-echo "******************************ROUTES ARE ADDED TO SPGWU,SERVER & ROUTER****************************"
+echo "****************************** ROUTES ARE ADDED TO SPGWU,SERVER & ROUTER ****************************"
 echo "========================================================================================================="
 
 # Add controller to the ovs
 sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 echo "========================================================================================================="
-echo "***********************RYU CONTROLLER IS SET ************************"
+echo "*********************** RYU CONTROLLER IS SET ************************"
 echo "========================================================================================================="
 #spgwu configs
 sudo docker exec oai-spgwu apt update
@@ -90,7 +90,7 @@ sudo docker exec oai-spgwu ip route del default via 192.168.70.129 dev eth0
 sudo ip netns exec oai-spgwu ip route add default via 10.0.0.3 dev ${C1_IF}
 #sudo docker exec <container_name_or_id> sh -c 'command1 && command2 && command3'
 echo "========================================================================================================="
-echo "*************************SPGWU CONFIGURATION IS DONE*******************************"
+echo "************************* SPGWU CONFIGURATION IS DONE *******************************"
 echo "========================================================================================================="
 
 #server configs
@@ -105,7 +105,7 @@ sudo docker exec server apt install -y wget
 sudo docker exec server ip route del default via 192.168.70.129 dev eth0
 sudo ip netns exec server ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C2_IF}
 echo "========================================================================================================="
-echo "**************************SERVER CONFIGURATION IS DONE************************"
+echo "************************** SERVER CONFIGURATION IS DONE ************************"
 echo "========================================================================================================="
 #router configs
 sudo docker exec router apt update
@@ -116,7 +116,7 @@ sudo docker exec router apt install -y iptables
 sudo docker exec router apt install -y net-tools
 sudo ip netns exec router ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C3_IF}
 echo "========================================================================================================="
-echo "************************ROUTER CONFIGURATION IS DONE***********************"
+echo "************************ ROUTER CONFIGURATION IS DONE ***********************"
 echo "========================================================================================================="
 echo "========================================================================================================="
 cat << "EOF"
