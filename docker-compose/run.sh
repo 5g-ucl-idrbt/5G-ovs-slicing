@@ -1,6 +1,22 @@
 #!/bin/bash
 
+echo "
 
+ .________ ________   ____ ____________ .____      .___________ _______________________________
+ |   ____//  _____/  |    |   \_   ___ \|    |     |   \______ \\______   \______   \__    ___/
+ |____  \/   \  ___  |    |   /    \  \/|    |     |   ||    |  \|       _/|    |  _/ |    |   
+ /       \    \_\  \ |    |  /\     \___|    |___  |   ||    `   \    |   \|    |   \ |    |   
+/______  /\______  / |______/  \______  /_______ \ |___/_______  /____|_  /|______  / |____|   
+       \/        \/                   \/        \/             \/       \/        \/           
+ .________ ________         .__  .__       .__                                                 
+ |   ____//  _____/    _____|  | |__| ____ |__| ____    ____                                   
+ |____  \/   \  ___   /  ___/  | |  |/ ___\|  |/    \  / ___\                                  
+ /       \    \_\  \  \___ \|  |_|  \  \___|  |   |  \/ /_/  >                                 
+/______  /\______  / /____  >____/__|\___  >__|___|  /\___  /                                  
+       \/        \/       \/             \/        \//_____/                                   
+
+
+"
 # creating links with the createlink.sh file
 sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh server s1
@@ -54,13 +70,15 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 echo "***********************RYU CONTROLLER IS SET ************************"
 
 #spgwu configs
+sudo docker exec oai-spgwu apt install -y iputils-ping
+sudo docker exec oai-spgwu apt install -y tcpdump
+sudo docker exec oai-spgwu apt install -y iproute2
+sudo docker exec oai-spgwu apt install -y iptables
 sudo docker exec oai-spgwu sysctl net.ipv4.ip_forward=1
 sudo docker exec oai-spgwu iptables -P FORWARD ACCEPT
 sudo docker exec oai-spgwu ip route del default via 192.168.70.129 dev eth0
-sudo docker exec oai-spgwu
-sudo docker exec oai-spgwu
-sudo docker exec oai-spgwu
 sudo ip netns exec oai-spgwu ip route add default via 10.0.0.3 dev ${C1_IF}
 #sudo docker exec <container_name_or_id> sh -c 'command1 && command2 && command3'
+echo "*************************SPGWU CONFIGURATION IS DONE*******************************"
 
 #github:abhic137
