@@ -33,7 +33,7 @@ sudo docker ps -a
    * Create Links
 ```
 sudo bash createLink.sh oai-spgwu s1
-sudo bash createLink.sh tomcat s1
+sudo bash createLink.sh server s1
 sudo bash createLink.sh router s1
 ```
    * Create bridge in s1
@@ -50,13 +50,13 @@ sudo docker exec s1 ovs-vsctl set-fail-mode br0 secure
 C1_IF=$(sudo ip netns exec oai-spgwu ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec oai-spgwu ip a add 10.0.0.1/24 dev ${C1_IF}
 C2_IF=$(sudo ip netns exec tomcat ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
-sudo ip netns exec tomcat ip a add 10.0.0.2/24 dev ${C2_IF}
+sudo ip netns exec server ip a add 10.0.0.2/24 dev ${C2_IF}
 C3_IF=$(sudo ip netns exec router ifconfig -a | grep -E "dcp.*"| awk -F':' '{print $1}')
 sudo ip netns exec router ip a add 10.0.0.3/24 dev ${C3_IF}
 
 sudo ip netns exec oai-spgwu ip r add 10.0.0.3/32 via 0.0.0.0 dev ${C1_IF}
 sudo ip netns exec oai-spgwu ip r add 10.0.0.2/32 via 0.0.0.0 dev ${C1_IF}
-sudo ip netns exec tomcat ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
+sudo ip netns exec server ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C2_IF}
 sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 ```
 
@@ -90,9 +90,9 @@ ifconfig #copy the port name starting with dcp and paste it in the <dev_name> in
 ip route add default via 10.0.0.3 dev <dev_name> #this will help UE to reach the internet through the router pc 
  
 ```
-## Inside the tomcat docker
+## Inside the server docker
 ```
-sudo docker exec -it tomcat bash
+sudo docker exec -it server bash
 ```
 ```
 apt update
@@ -128,12 +128,12 @@ ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
 sudo docker exec oai-spgwu ping -c3 10.0.0.3
-sudo docker exec tomcat ping -c3 10.0.0.1
+sudo docker exec server ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-# Hosting python server in tomcat docker:
+# Hosting python server in server docker:
 ```
-sudo docker exec -it tomcat bash
+sudo docker exec -it server bash
 
 python3 -m http.server 8888
 
@@ -216,7 +216,7 @@ tcpdump -i <interface_name> #interface starting with dcp
 ```
 ## To verify that the UE is reaching the server
 ```
-sudo docker exec -it tomcat bash
+sudo docker exec -it server bash
 ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
