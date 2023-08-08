@@ -102,4 +102,5 @@ sudo docker exec router apt install -y net-tools
 sudo ip netns exec router ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C3_IF}
 echo "************************ROUTER CONFIGURATION IS DONE***********************"
 
+
 #github:abhic137
