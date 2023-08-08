@@ -30,6 +30,12 @@ cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
+Run the script file to create bridge, connections and to add IPs & routes 
+```
+cd oai-cn5g-fed/docker-compose
+chmod +x run.sh
+sudo ./run.sh
+```
 <!--
    * Create Links
 ```
