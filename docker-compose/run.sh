@@ -54,6 +54,6 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 echo "***********************RYU CONTROLLER IS SET ************************"
 
 
-
+#sudo docker exec <container_name_or_id> sh -c 'command1 && command2 && command3'
 
 #github:abhic137
