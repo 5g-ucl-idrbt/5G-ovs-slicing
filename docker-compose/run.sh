@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "
+cat << "EOF"
+
 
  .________ ________   ____ ____________ .____      .___________ _______________________________
  |   ____//  _____/  |    |   \_   ___ \|    |     |   \______ \\______   \______   \__    ___/
@@ -15,8 +16,8 @@ echo "
 /______  /\______  / /____  >____/__|\___  >__|___|  /\___  /                                  
        \/        \/       \/             \/        \//_____/                                   
 
+EOF
 
-"
 # creating links with the createlink.sh file
 sudo bash createLink.sh oai-spgwu s1
 sudo bash createLink.sh server s1
