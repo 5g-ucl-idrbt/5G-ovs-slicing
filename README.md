@@ -2,7 +2,9 @@
 
 ## Refer these links to setup core and gnbsim
 In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 and developv3 we are using version 1.5.1 from master branch.
+
 for core: ```https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed``` 
+
 for gnbsim: ```https://github.com/abhic137/OAI-5G-GNBSIM-SPGWU/blob/main/README.md```  (follow this link to build gnbsim image)
 ```
 cd
@@ -30,7 +32,7 @@ cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
-Run the script file to create bridge, connections and to add IPs & routes 
+## Run the script file to create bridge, connections and to add IPs & routes 
 ```
 cd oai-cn5g-fed/docker-compose
 chmod +x run.sh
@@ -74,6 +76,7 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 -->
 
 * Inside the ryu container
+  Here we are running a simple switch program, we can run any custom program in the same manner.
 ```
 sudo docker exec -it ryu bash
 cd ryu/ryu/app
@@ -141,7 +144,7 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec server ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-# Hosting python server in server docker:
+## Hosting a simple python server in server docker:
 ```
 sudo docker exec -it server bash
 
@@ -150,6 +153,7 @@ python3 -m http.server 8888
 
 ```
 # Testing with GNBSIM instead of physical USRP and UE
+
 # For attaching 1 gNB and 1 UE
 ```
 cd oai-cn5g-fed/docker-compose
