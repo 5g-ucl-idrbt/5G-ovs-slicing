@@ -1,7 +1,7 @@
 # 5G-ovs-integration
 
 ## Refer these links to setup core and gnbsim
-In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 we are using version 1.5.1 from master branch.
+In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 and developv3 we are using version 1.5.1 from master branch.
 for core: ```https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed``` 
 for gnbsim: ```https://github.com/abhic137/OAI-5G-GNBSIM-SPGWU/blob/main/README.md```  (follow this link to build gnbsim image)
 ```
