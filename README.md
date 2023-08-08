@@ -79,7 +79,7 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
-
+<!--
 ## In spgwu 
 ```
 sudo docker exec -it oai-spgwu bash
@@ -133,6 +133,7 @@ ifconfig # copy the dcp dev name
 ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 
 ```
+-->
 ## Test to check if the ovs is properly configured
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
