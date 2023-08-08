@@ -71,6 +71,7 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 echo "***********************RYU CONTROLLER IS SET ************************"
 
 #spgwu configs
+sudo docker exec oai-spgwu apt update
 sudo docker exec oai-spgwu apt install -y iputils-ping
 sudo docker exec oai-spgwu apt install -y tcpdump
 sudo docker exec oai-spgwu apt install -y iproute2
@@ -83,6 +84,7 @@ sudo ip netns exec oai-spgwu ip route add default via 10.0.0.3 dev ${C1_IF}
 echo "*************************SPGWU CONFIGURATION IS DONE*******************************"
 
 #server configs
+sudo docker exec server apt update
 sudo docker exec server apt install -y iputils-ping
 sudo docker exec server apt install -y tcpdump
 sudo docker exec server apt install -y iproute2
