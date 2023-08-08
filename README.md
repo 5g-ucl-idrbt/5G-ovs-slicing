@@ -30,6 +30,7 @@ cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
+<!--
    * Create Links
 ```
 sudo bash createLink.sh oai-spgwu s1
@@ -64,6 +65,8 @@ sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 ```
 sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 ```
+-->
+
 * Inside the ryu container
 ```
 sudo docker exec -it ryu bash
