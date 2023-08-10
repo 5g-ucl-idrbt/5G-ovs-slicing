@@ -234,7 +234,15 @@ sudo docker exec -it server bash
 ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
-
+## To do the network slicing:follow the following steps
+To update the mac_to_port dictionary, you need to ping the server and router from the UE.
+```
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.2
+```
+```
+sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.2
+```
+IF you want to see what is being saved in the dictionary, you can create a json file named as mac_to_port in the same folder you are running ryu controller, and if not needed, remove the line from the code where it is being saved in json file(i.e., line no 27 & 28)
 # For stopping the processes
 ```
 sudo docker compose -f docker-compose-gnbsim.yaml down
