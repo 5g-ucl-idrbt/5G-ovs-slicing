@@ -4,7 +4,7 @@ services:
         container_name: "mysql"
         image: mysql:8.0
         volumes:
-            - ./database/oai_db2.sql:/docker-entrypoint-initdb.d/oai_db.sql
+            - ./database/oai_db3.sql:/docker-entrypoint-initdb.d/oai_db.sql
             - ./healthscripts/mysql-healthcheck2.sh:/tmp/mysql-healthcheck.sh
         environment:
             - TZ=Europe/Paris
@@ -123,21 +123,21 @@ services:
             - 38412/sctp
         environment:
             - TZ=Europe/Paris
-            - MCC=208
-            - MNC=95
+            - MCC=001 #208
+            - MNC=01 #95
             - REGION_ID=128
             - AMF_SET_ID=1
-            - SERVED_GUAMI_MCC_0=208
-            - SERVED_GUAMI_MNC_0=95
+            - SERVED_GUAMI_MCC_0=001 #208
+            - SERVED_GUAMI_MNC_0=01 #95
             - SERVED_GUAMI_REGION_ID_0=128
             - SERVED_GUAMI_AMF_SET_ID_0=1
             - SERVED_GUAMI_MCC_1=460
             - SERVED_GUAMI_MNC_1=11
             - SERVED_GUAMI_REGION_ID_1=10
             - SERVED_GUAMI_AMF_SET_ID_1=1
-            - PLMN_SUPPORT_MCC=208
-            - PLMN_SUPPORT_MNC=95
-            - PLMN_SUPPORT_TAC=0xa000
+            - PLMN_SUPPORT_MCC=001 #208
+            - PLMN_SUPPORT_MNC=01 #95
+            - PLMN_SUPPORT_TAC=1 #0xa000
             # Slice 0 (1, 0xFFFFFF)
             - SST_0=1
             # At least one slice SHALL be defined.
