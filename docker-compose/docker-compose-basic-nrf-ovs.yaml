@@ -131,8 +131,8 @@ services:
             - SERVED_GUAMI_MNC_0=01 #95
             - SERVED_GUAMI_REGION_ID_0=128
             - SERVED_GUAMI_AMF_SET_ID_0=1
-            - SERVED_GUAMI_MCC_1=460
-            - SERVED_GUAMI_MNC_1=11
+            - SERVED_GUAMI_MCC_1=001 #460
+            - SERVED_GUAMI_MNC_1=01 #11
             - SERVED_GUAMI_REGION_ID_1=10
             - SERVED_GUAMI_AMF_SET_ID_1=1
             - PLMN_SUPPORT_MCC=001 #208
