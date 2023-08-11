@@ -1,6 +1,6 @@
 # 5G-ovs-integration
 
-## Refer these links to setup core and gnbsim
+## Refer these links to setup core and Physical gNB
 In developv4 branch we are using physical devices to test the setup core version v1.5.1, while developv2 and developv3 use simulated environment. 
 In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 and developv3 we are using version 1.5.1 from master branch.
 
