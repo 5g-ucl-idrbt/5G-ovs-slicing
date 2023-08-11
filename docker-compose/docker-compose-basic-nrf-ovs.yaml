@@ -353,6 +353,8 @@ services:
         hostname: ryu
         container_name: ryu
         image: osrg/ryu:latest
+        volumes:
+        - ./ryuctrlr/final.py:/root/ryu/ryu/app/ryucode.py
         networks:
           ovscomm:
             ipv4_address: 172.18.0.4
