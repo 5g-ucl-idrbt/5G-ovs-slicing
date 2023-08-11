@@ -78,6 +78,11 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 * Inside the ryu container
   Here we are running a simple switch program, we can run any custom program in the same manner.
 ```
+sudo docker exec ryu ryu-manager --observe-links ryu/ryu/app/simple_switch.py 
+
+```
+OR
+```
 sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
