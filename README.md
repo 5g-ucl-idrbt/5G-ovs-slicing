@@ -225,11 +225,11 @@ ping -I 12.1.1.2 10.0.0.3
 ```
 ### checking connectivity with ther tomcat server (Python server)
 ```
-curl --interface 12.1.1.2 http://10.0.0.2:8888
+curl --interface 12.1.1.2 http://10.0.0.2:9999
 ```
 <!--### checking the connectivity to the server (tomcat)
 ```
-curl --interface 12.1.1.2 http://192.168.150.115:8888
+curl --interface 12.1.1.2 http://192.168.150.115:9999
 
 ```
 -->
@@ -297,6 +297,7 @@ sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
 
 ## To verify that network slicing is working
 Run simple python server on server.
+NOTE: Always run the python server on the port 9999 (according to the RYU code)
 ```
 python -m http.server 9999
 ```
