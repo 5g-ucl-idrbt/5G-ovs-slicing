@@ -163,6 +163,7 @@ python3 -m http.server 8888
 ```
 ## For getting internet connection in the UE
 ```
+sudo docker exec -it router bash
 ifconfig
 iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
