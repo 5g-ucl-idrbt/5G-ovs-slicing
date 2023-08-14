@@ -268,3 +268,25 @@ sudo docker compose -f docker-compose-gnbsim.yaml down
 ```
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
 ```
+
+
+
+## To verify that network slicing is working
+Run simple python server on server.
+```
+python -m http.server 9999
+```
+Run simple python server on router
+```
+python -m http.server 9988
+```
+Now if you will do the wget command by the ip of router but the tcp_port on which the server is running, it will be replied by server and not router. You can also verify it on the terminal, from where you got the reply.
+To do the wget command. Run following command in gnbsim
+```
+wget --bind-address= <UE_ip_address> <router_ip_address>:9999
+```
+And if we give some other tcp_port, it will be replied by router
+```
+wget --bind-address= <UE_ip_address> <router_ip_address>:9988
+```
+So, you can observe in the terminal(router & server) that even if the ip was same but was answered by differenrt systems.
