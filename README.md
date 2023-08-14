@@ -161,6 +161,14 @@ python3 -m http.server 8888
 
 
 ```
+## For getting internet connection in the UE
+```
+ifconfig
+iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+```
 # Testing with GNBSIM instead of physical USRP and UE
 
 # For attaching 1 gNB and 1 UE
