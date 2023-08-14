@@ -170,6 +170,19 @@ iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 ```
+## For checkng the flows in S1 Switch
+Everytime we run a diffrent controller code we have to delete the flows in the switch s1 first.
+```
+sudo docker exec -it s1 bash
+```
+checking flows
+```
+ovs-ofctl dump-flows br0
+```
+deleting flows
+```
+ovs-ofctl del-flows br0
+```
 # Testing with GNBSIM instead of physical USRP and UE
 
 # For attaching 1 gNB and 1 UE
