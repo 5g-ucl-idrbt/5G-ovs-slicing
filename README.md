@@ -81,6 +81,10 @@ sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 sudo docker exec ryu ryu-manager --observe-links ryu/ryu/app/simple_switch.py 
 
 ```
+Running the slicing RYU code
+```
+sudo docker exec ryu ryu-manager --observe-links ryu/ryu/app/ryucode.py
+```
 OR
 ```
 sudo docker exec -it ryu bash
