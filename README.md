@@ -160,6 +160,31 @@ python3 -m http.server 9999
 
 
 ```
+## For getting internet connection in the UE
+```
+sudo docker exec -it router bash
+ifconfig
+iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+```
+# Setting up gNB
+Clone this repo  and follow the instructions ref: https://github.com/5g-ucl-idrbt/oai-gnodeb-b210
+## Commands to be executed in gNB
+```
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -P FORWARD ACCEPT
+sudo ip route add 192.168.70.128/26 via <Bridge IP of Core VM>
+```
+## Commmands to be executed in Core VM
+```
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -P FORWARD ACCEPT
+sudo ip route add 192.168.71.194 via <GNB Baremetal IP>
+sudo ip route add 12.1.1.0/24 via 192.168.70.134 # Forward packets to Mobiles from external sources
+```
+
 <!--
 # Testing with GNBSIM instead of physical USRP and UE
 
