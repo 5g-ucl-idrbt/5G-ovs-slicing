@@ -86,17 +86,30 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
-For running the slicing code
+For running the slicing code go to ryu docker
 ```
 sudo docker exec -it ryu bash
 cd ryu/ryu/app
-nano ryucode.py
 ```
 Before running the ryu code, change the IP address of the server and router in the code. And also change the MAC addresses accordingly. to take IP and mac address of the server,router & oai-spgwu
+On line no 105 change MAC address of server(10.0.0.2) On line no 106 change MAC address of server(10.0.0.2) On line no 124 change MAC address of router(10.0.0.3) On line no 125 change MAC address of oai-spgwu
+
+In the other terminal copy the MACs of the server,router and spgwu
+```
+sudo docker exec server ifconfig
+```
+```
+sudo docker exec router ifconfig
+```
+```
+sudo docker exec oai-spgwu ifconfig
+```
+in the ryu docker 
 ```
 ifconfig
+nano ryucode.py
+
 ```
-On line no 105 change MAC address of server(10.0.0.2) On line no 106 change MAC address of server(10.0.0.2) On line no 124 change MAC address of router(10.0.0.3) On line no 125 change MAC address of oai-spgwu
 ```
 ryu-manager --observe-links ryucode.py 
 
