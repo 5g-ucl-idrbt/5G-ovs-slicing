@@ -24,8 +24,8 @@ class TrafficSlicing(app_manager.RyuApp):
  
     def update_mac_to_port(self, mac_address, port):
         self.mac_to_port[mac_address] = port
-        with open('mac_to_port.json', 'w') as json_file:
-           json.dump(self.mac_to_port, json_file)
+       # with open('mac_to_port.json', 'w') as json_file:
+        #   json.dump(self.mac_to_port, json_file)
         
             
 
@@ -185,7 +185,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 ip_proto=0x11
                 )
             actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
-            self.add_flow(datapath, 1, match, actions)
+          #  self.add_flow(datapath, 1, match, actions)
             self._send_package(msg, datapath, in_port, actions)
 
 
