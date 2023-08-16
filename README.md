@@ -20,6 +20,7 @@ git branch -a
 git checkout developv3
 cd 5G-ovs-integration/docker-compose
 cp run.sh createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-compose
+cp oai_db3.sql ~/oai-cn5g-fed/docker-compose/database
 
 ``` 
 ## In core
@@ -86,6 +87,7 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
+# Slicing
 ## For running the slicing code go to ryu docker
 ```
 sudo docker exec -it ryu bash
@@ -94,6 +96,11 @@ cd ryu/ryu/app
 Before running the ryu code, change the IP address of the server and router in the code. And also change the MAC addresses accordingly. to take IP and mac address of the server,router & oai-spgwu
 On line no 105 change MAC address of server(10.0.0.2) On line no 106 change MAC address of server(10.0.0.2) On line no 124 change MAC address of router(10.0.0.3) On line no 125 change MAC address of oai-spgwu
 
+in the ryu docker 
+```
+nano ryucode.py
+
+```
 In the other terminal copy the MACs of the server,router and spgwu
 ```
 sudo docker exec server ifconfig
@@ -104,12 +111,7 @@ sudo docker exec router ifconfig
 ```
 sudo docker exec oai-spgwu ifconfig
 ```
-in the ryu docker 
-```
-ifconfig
-nano ryucode.py
-
-```
+In order to run the RYU code
 ```
 ryu-manager --observe-links ryucode.py 
 
@@ -169,6 +171,15 @@ ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 
 ```
 -->
+## For getting internet connection in the UE
+```
+sudo docker exec -it router bash
+ifconfig
+iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+```
 ## Test to check if the ovs is properly configured
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
@@ -176,7 +187,7 @@ sudo docker exec oai-spgwu ping -c3 10.0.0.3
 sudo docker exec server ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
-## Hosting a simple python server in server docker:
+## Hosting a simple python server in server docker
 ```
 sudo docker exec server python3 -m http.server 9999
 ```
@@ -188,14 +199,16 @@ python3 -m http.server 9999
 
 
 ```
-## For getting internet connection in the UE
+## Commmands to be executed in Core VM in order to connect to the gNB
 ```
-sudo docker exec -it router bash
-ifconfig
-iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
-iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -P FORWARD ACCEPT
+sudo ip route add 192.168.71.194 via <GNB Baremetal IP>
+sudo ip route add 12.1.1.0/24 via 192.168.70.134 # Forward packets to Mobiles from external sources
+```
+To check if the devices are connected to core follow the AMF logs
+```
+sudo docker logs --follow oai-amf
 ```
 # Setting up gNB
 Clone this repo  and follow the instructions ref: https://github.com/5g-ucl-idrbt/oai-gnodeb-b210
@@ -207,22 +220,17 @@ sudo iptables -P FORWARD ACCEPT
 sudo ip route add 192.168.70.128/26 via <Bridge IP of Core VM>
 ```
 ```
-cd ci-scripts/yaml_files/sa_b200_gnb/; sudo docker compose -f docker-compose.yml up -d
+cd ci-scripts/yaml_files/sa_b200_gnb/
+sudo docker-compose up -d
 ```
 ```
-sudo docker attach sa-b210-gnb
+sudo docker exec -it sa-b210-gnb bash
 ```
 ```
 bash bin/entrypoint.sh
 /opt/oai-gnb/bin/nr-softmodem -O /opt/oai-gnb/etc/gnb.conf $USE_ADDITIONAL_OPTIONS
 ```
-## Commmands to be executed in Core VM
-```
-sudo sysctl net.ipv4.ip_forward=1
-sudo iptables -P FORWARD ACCEPT
-sudo ip route add 192.168.71.194 via <GNB Baremetal IP>
-sudo ip route add 12.1.1.0/24 via 192.168.70.134 # Forward packets to Mobiles from external sources
-```
+
 
 <!--
 # Testing with GNBSIM instead of physical USRP and UE
@@ -277,10 +285,7 @@ sudo docker logs gnbsim
 sudo docker logs gnbsim2
 ```
 -->
-To check if the devices are connected to core
-```
-sudo docker logs --follow oai-amf
-```
+
 Ping tests to perform in UE 
 ```
 ping 8.8.8.8
