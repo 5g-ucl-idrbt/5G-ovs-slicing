@@ -200,6 +200,7 @@ curl --interface 12.1.1.2 http://192.168.150.115:8888
 
 ```
 -->
+<!--
 # For attaching 2 gnbs and 2 Ues respectively
 ```
 sudo docker-compose -f docker-compose-gnbsim.yaml up -d gnbsim gnbsim2
@@ -216,22 +217,16 @@ To check if the devices are connected to core
 ```
 sudo docker logs --follow oai-amf
 ```
-Ping tests (here 12.1.1.3 and 12.1.1.4 are the UE IPs respectively it may differ for you) 
+Ping tests to perform in UE 
 ```
-sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 8.8.8.8
-sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 8.8.8.8
+ping 8.8.8.8
 ```
 ```
-sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.1
-sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.2
-sudo docker exec gnbsim2 ping -c 3 -I 12.1.1.3 10.0.0.3
+ping 10.0.0.1
+ping 10.0.0.2
+ping 10.0.0.3
+```
 
-```
-```
-sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.1
-sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.2
-sudo docker exec gnbsim ping -c 3 -I 12.1.1.4 10.0.0.3
-```
 ## To verify that the UE is going through the router towards the internet
 ```
 sudo docker exec -it router bash
