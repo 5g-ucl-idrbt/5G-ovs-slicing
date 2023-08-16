@@ -248,13 +248,6 @@ ping 10.0.0.2
 ping 10.0.0.3
 ```
 IF you want to see what is being saved in the dictionary, you can create a json file named as mac_to_port in the same folder you are running ryu controller, and if not needed, remove the line from the code where it is being saved in json file(i.e., line no 27 & 28)
-# For stopping the processes
-```
-sudo docker compose -f docker-compose-gnbsim.yaml down
-```
-```
-sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
-```
 
 
 ## To verify that network slicing is working
@@ -277,4 +270,12 @@ And if we give some other tcp_port, it will be replied by router
 wget --bind-address= <UE_ip_address> <router_ip_address>:9988
 ```
 So, you can observe in the terminal(router & server) that even if the ip was same but was answered by differenrt systems.
+
+# For stopping the processes
+```
+sudo docker compose -f docker-compose-gnbsim.yaml down
+```
+```
+sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
+```
 
