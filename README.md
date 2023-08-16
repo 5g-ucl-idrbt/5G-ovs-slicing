@@ -74,7 +74,7 @@ sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 ```
 -->
-
+## Running the Ryu code
 * Inside the ryu container
   Here we are running a simple switch program, we can run any custom program in the same manner.
 ```
@@ -86,7 +86,7 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
-For running the slicing code go to ryu docker
+## For running the slicing code go to ryu docker
 ```
 sudo docker exec -it ryu bash
 cd ryu/ryu/app
