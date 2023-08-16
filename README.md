@@ -172,10 +172,21 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 # Setting up gNB
 Clone this repo  and follow the instructions ref: https://github.com/5g-ucl-idrbt/oai-gnodeb-b210
 ## Commands to be executed in gNB
+
 ```
 sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -P FORWARD ACCEPT
 sudo ip route add 192.168.70.128/26 via <Bridge IP of Core VM>
+```
+```
+cd ci-scripts/yaml_files/sa_b200_gnb/; sudo docker compose -f docker-compose.yml up -d
+```
+```
+sudo docker attach sa-b210-gnb
+```
+```
+bash bin/entrypoint.sh
+/opt/oai-gnb/bin/nr-softmodem -O /opt/oai-gnb/etc/gnb.conf $USE_ADDITIONAL_OPTIONS
 ```
 ## Commmands to be executed in Core VM
 ```
@@ -298,7 +309,7 @@ So, you can observe in the terminal(router & server) that even if the ip was sam
 
 # For stopping the processes
 ```
-sudo docker compose -f docker-compose-gnbsim.yaml down
+sudo docker-compose down
 ```
 ```
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
