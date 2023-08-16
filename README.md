@@ -101,7 +101,7 @@ in the ryu docker
 nano ryucode.py
 
 ```
-In the other terminal copy the MACs of the server,router and spgwu
+In the other terminal copy the MACs of the server,router and spgwu and paste it in the ryucode.py
 ```
 sudo docker exec server ifconfig
 ```
