@@ -150,13 +150,13 @@ sudo docker exec router ping -c3 10.0.0.1
 ```
 ## Hosting a simple python server in server docker:
 ```
-sudo docker exec server python3 -m http.server 8888
+sudo docker exec server python3 -m http.server 9999
 ```
 OR
 ```
 sudo docker exec -it server bash
 
-python3 -m http.server 8888
+python3 -m http.server 9999
 
 
 ```
