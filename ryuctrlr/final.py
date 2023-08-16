@@ -25,7 +25,7 @@ class TrafficSlicing(app_manager.RyuApp):
     def update_mac_to_port(self, mac_address, port):
         self.mac_to_port[mac_address] = port
         with open('mac_to_port.json', 'w') as json_file:
-            json.dump(self.mac_to_port, json_file)
+           json.dump(self.mac_to_port, json_file)
         
             
 
@@ -102,8 +102,8 @@ class TrafficSlicing(app_manager.RyuApp):
 
             actions = [
                 parser.OFPActionSetField(ipv4_dst="10.0.0.2"),
-                parser.OFPActionSetField(eth_dst="c6:3e:92:e6:b0:b1"),  # ADD MAC ADDRESS OF THE SERVER
-                parser.OFPActionOutput(self.mac_to_port["c6:3e:92:e6:b0:b1"])  #ADD MAC ADDRESS OF THE SERVER
+                parser.OFPActionSetField(eth_dst="c6:56:5c:0e:ee:ec"),
+                parser.OFPActionOutput(self.mac_to_port["c6:56:5c:0e:ee:ec"])
 
             ]
             self.add_flow(datapath, 2, match, actions)
@@ -121,8 +121,8 @@ class TrafficSlicing(app_manager.RyuApp):
 
             actions = [
                 parser.OFPActionSetField(ipv4_src="10.0.0.3"),
-                parser.OFPActionSetField(eth_src = "d6:0d:f2:82:82:fb"), # ADD MAC ADDRESS OF THE ROTUER
-                parser.OFPActionOutput(self.mac_to_port["1e:f0:17:87:3e:73"]) # ADD MAC ADDRESS OF THE OAI-SPGWU
+                parser.OFPActionSetField(eth_src = "ce:e7:87:dd:6d:53"),
+                parser.OFPActionOutput(self.mac_to_port["ba:ee:0a:fc:4b:43"])
             ]
             self.add_flow(datapath, 2, match, actions)
             self._send_package(msg, datapath, in_port, actions)
@@ -163,16 +163,32 @@ class TrafficSlicing(app_manager.RyuApp):
 
         elif pkt.get_protocol(icmp.icmp):
             out_port = self.mac_to_port[dst_mac]
+	    print("icmp")
             match = datapath.ofproto_parser.OFPMatch(
                 in_port=in_port,
                 eth_dst=dst_mac,
                 eth_src=src_mac,
-                eth_type=ether_types.ETH_TYPE_IP,
-                ip_proto=0x01,  # ICMP
+		ip_proto=0x01
+                )
+            actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
+	    self.add_flow(datapath, 1, match, actions)
+            self._send_package(msg, datapath, in_port, actions)
+
+
+	elif pkt.get_protocol(udp.udp) :
+	    print("udp")
+            out_port = self.mac_to_port[dst_mac]
+            match = datapath.ofproto_parser.OFPMatch(
+                in_port=in_port,
+                eth_dst=dst_mac,
+                eth_src=src_mac,
+                ip_proto=0x11
                 )
             actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
             self.add_flow(datapath, 1, match, actions)
             self._send_package(msg, datapath, in_port, actions)
+
+
 	else :
 	    print("reached end")
 
