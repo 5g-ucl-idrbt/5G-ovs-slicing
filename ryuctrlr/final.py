@@ -102,8 +102,8 @@ class TrafficSlicing(app_manager.RyuApp):
 
             actions = [
                 parser.OFPActionSetField(ipv4_dst="10.0.0.2"),
-                parser.OFPActionSetField(eth_dst="c6:3e:92:e6:b0:b1"),
-                parser.OFPActionOutput(self.mac_to_port["c6:3e:92:e6:b0:b1"])
+                parser.OFPActionSetField(eth_dst="c6:3e:92:e6:b0:b1"),  # ADD MAC ADDRESS OF THE SERVER
+                parser.OFPActionOutput(self.mac_to_port["c6:3e:92:e6:b0:b1"])  #ADD MAC ADDRESS OF THE SERVER
 
             ]
             self.add_flow(datapath, 2, match, actions)
@@ -121,8 +121,8 @@ class TrafficSlicing(app_manager.RyuApp):
 
             actions = [
                 parser.OFPActionSetField(ipv4_src="10.0.0.3"),
-                parser.OFPActionSetField(eth_src = "d6:0d:f2:82:82:fb"),
-                parser.OFPActionOutput(self.mac_to_port["1e:f0:17:87:3e:73"])
+                parser.OFPActionSetField(eth_src = "d6:0d:f2:82:82:fb"), # ADD MAC ADDRESS OF THE ROTUER
+                parser.OFPActionOutput(self.mac_to_port["1e:f0:17:87:3e:73"]) # ADD MAC ADDRESS OF THE OAI-SPGWU
             ]
             self.add_flow(datapath, 2, match, actions)
             self._send_package(msg, datapath, in_port, actions)
