@@ -297,19 +297,7 @@ ping 10.0.0.2
 ping 10.0.0.3
 ```
 
-## To verify that the UE is going through the router towards the internet
-```
-sudo docker exec -it router bash
-ifconfig 
-tcpdump -i <interface_name> #interface starting with dcp 
-```
-## To verify that the UE is reaching the server
-```
-sudo docker exec -it server bash
-ifconfig
-tcpdump -i <interface_name> #interface starting with dcp
-```
-## To do the network slicing:follow the following steps
+## To do the network slicing
 To update the mac_to_port dictionary, you need to ping the server and router from the UE.
 ```
 ping 10.0.0.2
@@ -341,10 +329,24 @@ wget --bind-address= <UE_ip_address> <router_ip_address>:9988
 ```
 So, you can observe in the terminal(router & server) that even if the ip was same but was answered by differenrt systems.
 
+## To verify that the UE is going through the router towards the internet
+```
+sudo docker exec -it router bash
+ifconfig 
+tcpdump -i <interface_name> #interface starting with dcp 
+```
+## To verify that the UE is reaching the server
+```
+sudo docker exec -it server bash
+ifconfig
+tcpdump -i <interface_name> #interface starting with dcp
+```
 # For stopping the processes
+For shutting down gNB
 ```
 sudo docker-compose down
 ```
+For shutting down the core
 ```
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
 ```
