@@ -10,7 +10,7 @@ for core: ```https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed```
 cd
 git clone https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed.git
 ```
-## Adding ovs file to oai-setup
+## Adding files to oai-setup
 Clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
 ```
 cd
