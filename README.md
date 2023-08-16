@@ -297,7 +297,7 @@ sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
 
 ## To verify that network slicing is working
 Run simple python server on server.
-NOTE: Always run the python server on the port 9999 (according to the RYU code)
+NOTE: Always run the python server on the port 9999 (according to the RYU code).
 ```
 python -m http.server 9999
 ```
