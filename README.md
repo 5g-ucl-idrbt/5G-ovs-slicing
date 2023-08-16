@@ -1,4 +1,4 @@
-# 5G-ovs-integration
+# 5G-ovs-integration with MEC slicing capability
 
 ## Refer these links to setup core and Physical gNB
 In developv4 branch we are using physical devices to test the setup core version v1.5.1, while developv2 and developv3 use simulated environment. 
