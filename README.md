@@ -160,6 +160,7 @@ python3 -m http.server 8888
 
 
 ```
+<!--
 # Testing with GNBSIM instead of physical USRP and UE
 
 # For attaching 1 gNB and 1 UE
@@ -210,6 +211,7 @@ To know the Ip of the UEs
 sudo docker logs gnbsim
 sudo docker logs gnbsim2
 ```
+-->
 To check if the devices are connected to core
 ```
 sudo docker logs --follow oai-amf
