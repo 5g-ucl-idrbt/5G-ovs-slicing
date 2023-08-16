@@ -39,6 +39,15 @@ cd oai-cn5g-fed/docker-compose
 chmod +x run.sh
 sudo ./run.sh
 ```
+## For getting internet connection in the UE
+```
+sudo docker exec -it router bash
+ifconfig
+iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+```
 <!--
    * Create Links
 ```
@@ -171,15 +180,7 @@ ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 
 ```
 -->
-## For getting internet connection in the UE
-```
-sudo docker exec -it router bash
-ifconfig
-iptables -A FORWARD -i <dcp_INT> -o eth0 -j ACCEPT
-iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-```
 ## Test to check if the ovs is properly configured
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
