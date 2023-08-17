@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+    streaming:
+        container_name: "rtmp-streaming"
+        image: rtmp-hls:latest
+        environment:
+            - TZ=Asia/India
+            - HTTP_PROXY=${http_proxy}
+            - HTTPS_PROXY=${http_proxy}
+        ports:
+            - '1935:1935'
+            - '9080:8080'
+        volumes:
+            - ../../docker-compose/players/:/usr/local/nginx/html/players
