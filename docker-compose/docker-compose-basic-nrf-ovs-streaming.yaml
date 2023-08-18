@@ -311,9 +311,9 @@ services:
 
     oai-speedtest:
         image: openspeedtest:latest
-        environment:
-            - HTTP_PROXY=${http_proxy}
-            - HTTPS_PROXY=${https_proxy}
+        #environment:
+            #- HTTP_PROXY=${http_proxy}
+            #- HTTPS_PROXY=${https_proxy}
         restart: unless-stopped
         container_name: oai-speedtest
         ports:
@@ -337,11 +337,11 @@ services:
         image: rtmp-hls:latest
         mem_limit: "1g"
         mem_reservation: "512m"
-        cpus: "2"
+        cpus: 2
         environment:
             - TZ=Asia/India
-            - HTTP_PROXY=${http_proxy}
-            - HTTPS_PROXY=${https_proxy}
+            #- HTTP_PROXY=${http_proxy}
+            #- HTTPS_PROXY=${https_proxy}
         ports:
             - '1935:1935'
             - '9080:8080'
