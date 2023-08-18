@@ -349,6 +349,29 @@ sudo docker exec -it server bash
 ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
+# For running teh speed test in UE
+Go to a browser in the UE and type the following ip
+```
+http://192.168.70.140:3000
+```
+# For running and viewing the rtmp server stream
+to view the stream go to your browser in a pc
+```
+http://192.168.70.141:9080/players/hls.html
+
+```
+OR
+```
+http://<CORE_VM IP>:9080/players/hls.html
+```
+
+in mobile phone you have to use astra appl
+add this as rtmp server
+```
+192.168.70.141:1935/live
+
+```
+key is ```test```
 # For stopping the processes
 For shutting down gNB
 ```
