@@ -233,7 +233,7 @@ cd ci-scripts/yaml_files/sa_b200_gnb/
 sudo docker-compose up -d
 ```
 ```
-sudo docker exec -it sa-b210-gnb bash
+sudo docker exec -it sa-b200-gnb bash
 ```
 ```
 bash bin/entrypoint.sh
