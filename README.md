@@ -1,4 +1,5 @@
 # 5G-ovs-integration with MEC & slicing capability
+This experiment has been performed by 5G use case lab (5GUCL) IDRBT.
 Requirements: USRP B210, PC with 16GB RAM and a hexacore processor 
 ## Refer these links to setup core in VM and Physical gNB
 In developv4 branch we are using physical devices to test the setup core version v1.5.1, while developv2 and developv3 use simulated environment. 
