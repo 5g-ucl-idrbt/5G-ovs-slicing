@@ -25,11 +25,36 @@ cp oai_db3.sql ~/oai-cn5g-fed/docker-compose/database
 
 ``` 
 -->
-## In core
+
+## Clone the repo
+```
+cd
+git clone https://github.com/5g-ucl-idrbt/5G-ovs-integration.git
+git branch -a
+git checkout developv4
+```
+## Build the required images
+
+for RYU
+```
+ sudo docker build -f Dockerfile.Ryu -t osrg/ryu:latest --network host .
+```
+for SPGWU
+```
+sudo docker build -f Dockerfile.SPGWU -t oaisoftwarealliance/oai-spgwu-tiny:v1.5.1  --network host .  
+```
+for UBUNTU
+```
+sudo docker build -f Dockerfile.Ubuntu -t ubuntu:latest --network host . 
+```
+
+
+## Pull the required images
 ```
 sudo docker pull openvswitch/ovs:2.11.2_debian
 sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
 ```
+# Running the Core
 ```
 cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
