@@ -114,6 +114,9 @@ sudo docker exec router apt install -y tcpdump
 sudo docker exec router apt install -y iproute2
 sudo docker exec router apt install -y iptables 
 sudo docker exec router apt install -y net-tools
+sudo docker exec router iptables -A FORWARD -i ${C3_IF} -o eth0 -j ACCEPT
+sudo docker exec router iptables -A FORWARD -i eth0 -o ${C3_IF} -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo docker exec router iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo ip netns exec router ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C3_IF}
 echo "========================================================================================================="
 echo "************************ ROUTER CONFIGURATION IS DONE ***********************"
