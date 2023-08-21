@@ -47,7 +47,11 @@ for UBUNTU
 ```
 sudo docker build -f Dockerfile.Ubuntu -t ubuntu:latest --network host . 
 ```
-
+for RTMP Server & Speedtest server
+``
+cd component
+sudo ./mergeAndCreate.sh
+```
 
 ## Pull the required images
 ```
