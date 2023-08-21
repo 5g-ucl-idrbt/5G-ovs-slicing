@@ -4,7 +4,7 @@ Requirements: USRP B210, PC with 16GB RAM and a hexacore processor
 ## Refer these links to setup core in VM and Physical gNB
 In developv4 branch we are using physical devices to test the setup core version v1.5.1, while developv2 and developv3 use simulated environment. 
 In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 and developv3 we are using version 1.5.1 from master branch.
-
+<!--
 for core: ```https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed``` 
 
 ```
@@ -24,6 +24,7 @@ cp run.sh createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-
 cp oai_db3.sql ~/oai-cn5g-fed/docker-compose/database
 
 ``` 
+-->
 ## In core
 ```
 sudo docker pull openvswitch/ovs:2.11.2_debian
