@@ -77,6 +77,7 @@ cd oai-cn5g-fed/docker-compose
 chmod +x run.sh
 sudo ./run.sh
 ```
+<!--
 ## For getting internet connection in the UE
 ```
 sudo docker exec -it router bash
@@ -86,6 +87,7 @@ iptables -A FORWARD -i eth0 -o <dcp_INT> -m state --state RELATED,ESTABLISHED -j
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 ```
+-->
 <!--
    * Create Links
 ```
