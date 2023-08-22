@@ -79,11 +79,11 @@ echo "==========================================================================
 echo "*********************** RYU CONTROLLER IS SET ************************"
 echo "========================================================================================================="
 #spgwu configs
-sudo docker exec oai-spgwu apt update
-sudo docker exec oai-spgwu apt install -y iputils-ping
-sudo docker exec oai-spgwu apt install -y tcpdump
-sudo docker exec oai-spgwu apt install -y iproute2
-sudo docker exec oai-spgwu apt install -y iptables
+#sudo docker exec oai-spgwu apt update
+#sudo docker exec oai-spgwu apt install -y iputils-ping
+#sudo docker exec oai-spgwu apt install -y tcpdump
+#sudo docker exec oai-spgwu apt install -y iproute2
+#sudo docker exec oai-spgwu apt install -y iptables
 sudo docker exec oai-spgwu sysctl net.ipv4.ip_forward=1
 sudo docker exec oai-spgwu iptables -P FORWARD ACCEPT
 sudo docker exec oai-spgwu ip route del default via 192.168.70.129 dev eth0
@@ -94,26 +94,26 @@ echo "************************* SPGWU CONFIGURATION IS DONE ********************
 echo "========================================================================================================="
 
 #server configs
-sudo docker exec server apt update
-sudo docker exec server apt install -y iputils-ping
-sudo docker exec server apt install -y tcpdump
-sudo docker exec server apt install -y iproute2
-sudo docker exec server apt install -y iptables
-sudo docker exec server apt install -y net-tools
-sudo docker exec server apt-get install -y python3
-sudo docker exec server apt install -y wget
+#sudo docker exec server apt update
+#sudo docker exec server apt install -y iputils-ping
+#sudo docker exec server apt install -y tcpdump
+#sudo docker exec server apt install -y iproute2
+#sudo docker exec server apt install -y iptables
+#sudo docker exec server apt install -y net-tools
+#sudo docker exec server apt-get install -y python3
+#sudo docker exec server apt install -y wget
 sudo docker exec server ip route del default via 192.168.70.129 dev eth0
 sudo ip netns exec server ip r add 12.1.1.0/24 via 10.0.0.1 dev ${C2_IF}
 echo "========================================================================================================="
 echo "************************** SERVER CONFIGURATION IS DONE ************************"
 echo "========================================================================================================="
 #router configs
-sudo docker exec router apt update
-sudo docker exec router apt install -y iputils-ping
-sudo docker exec router apt install -y tcpdump
-sudo docker exec router apt install -y iproute2
-sudo docker exec router apt install -y iptables 
-sudo docker exec router apt install -y net-tools
+#sudo docker exec router apt update
+#sudo docker exec router apt install -y iputils-ping
+#sudo docker exec router apt install -y tcpdump
+#sudo docker exec router apt install -y iproute2
+#sudo docker exec router apt install -y iptables 
+#sudo docker exec router apt install -y net-tools
 sudo docker exec router iptables -A FORWARD -i ${C3_IF} -o eth0 -j ACCEPT
 sudo docker exec router iptables -A FORWARD -i eth0 -o ${C3_IF} -m state --state RELATED,ESTABLISHED -j ACCEPT
 sudo docker exec router iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
