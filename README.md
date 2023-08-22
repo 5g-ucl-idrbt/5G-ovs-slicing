@@ -336,7 +336,7 @@ ping 10.0.0.1
 ping 10.0.0.2
 ping 10.0.0.3
 ```
-
+<!--
 ## To do the network slicing
 To update the mac_to_port dictionary, you need to ping the server and router from the UE.
 ```
@@ -346,17 +346,17 @@ ping 10.0.0.2
 ping 10.0.0.3
 ```
 IF you want to see what is being saved in the dictionary, you can create a json file named as mac_to_port in the same folder you are running ryu controller, and if not needed, remove the line from the code where it is being saved in json file(i.e., line no 27 & 28)
-
+-->
 
 ## To verify that network slicing is working
 Run simple python server on server.
 NOTE: Always run the python server on the port 9999 (according to the RYU code)
 ```
-python -m http.server 9999
+sudo docker exec server python -m http.server 9999
 ```
 Run simple python server on router
 ```
-python -m http.server 9988
+sudo docker exec router python -m http.server 9988
 ```
 Now if you will do the wget command by the ip of router but the tcp_port on which the server is running, it will be replied by server and not router. You can also verify it on the terminal, from where you got the reply.
 To do the wget command. Run following command in gnbsim
