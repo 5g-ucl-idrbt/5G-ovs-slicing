@@ -388,7 +388,7 @@ In the UE open the terminal (termux app) and use the command wget to reach serve
 wget 10.0.0.3:9999 #IP of the router
 ```
 Here we have used the Ip of the router,but the port number is ```9999```. ie., if the UE is trying to reach the internet via the port 9999 it can communicate with the server.
-we can observe the logs in the tab where we ran the ```sudo docker exec server python3 -m http.server 9999``` command.
+we can observe the logs in the tab where we ran the ```sudo docker exec server python3 -m http.server 9999``` command. By looking at these logs we can conclude that the UE reached the server ie., 10.0.0.2.
 
 
 
