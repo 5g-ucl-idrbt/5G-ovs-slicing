@@ -407,7 +407,7 @@ sudo docker exec -it server bash
 ifconfig
 tcpdump -i <interface_name> #interface starting with dcp
 ```
-# For running teh speed test in UE
+# For running the speed test in UE
 Go to a browser in the UE and type the following ip
 ```
 http://192.168.70.140:3000
@@ -427,7 +427,7 @@ http://<CORE_VM IP>:9080/players/hls.html
 http://localhost:9080/players/hls.html
 ```
 
-in mobile phone you have to use astra appl
+in mobile phone you have to use astra app
 add this as rtmp server
 ```
 192.168.70.141:1935/live
