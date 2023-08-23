@@ -124,6 +124,7 @@ sudo ip netns exec router ip r add 10.0.0.1/32 via 0.0.0.0 dev ${C3_IF}
 sudo docker exec s1 ovs-vsctl set-controller br0 tcp:172.18.0.4:6653
 ```
 -->
+<!--
 ## Running the Ryu code (For simple switch functionality)
 * Inside the ryu container
   Here we are running a simple switch program, we can run any custom program in the same manner.
@@ -136,8 +137,14 @@ sudo docker exec -it ryu bash
 cd ryu/ryu/app
 ryu-manager --observe-links simple_switch.py 
 ```
+-->
 # Slicing
-## For running the slicing code go to ryu docker
+## For running the slicing code
+```
+sudo docker exec ryu ryu-manager --observe-links ryu/ryu/app/ryucode.py
+```
+
+<!--
 ```
 sudo docker exec -it ryu bash
 cd ryu/ryu/app
@@ -165,6 +172,8 @@ In order to run the RYU code
 ryu-manager --observe-links ryucode.py 
 
 ```
+-->
+
 <!--
 ## In spgwu 
 ```
@@ -221,7 +230,8 @@ ip route add 12.1.1.0/24 via 10.0.0.1 dev <DEV_NAME>
 ```
 -->
 
-## Test to check if the ovs is properly configured
+## Test to check if the ovs is properly configure
+In a new terminal 
 ```
 sudo docker exec oai-spgwu ping -c3 10.0.0.2
 sudo docker exec oai-spgwu ping -c3 10.0.0.3
@@ -229,10 +239,11 @@ sudo docker exec server ping -c3 10.0.0.1
 sudo docker exec router ping -c3 10.0.0.1
 ```
 ## Hosting a simple python server in server docker
+In a new terminal
 ```
 sudo docker exec server python3 -m http.server 9999
 ```
-OR
+```OR```
 ```
 sudo docker exec -it server bash
 
@@ -349,6 +360,7 @@ IF you want to see what is being saved in the dictionary, you can create a json 
 -->
 
 ## To verify that network slicing is working
+<!--
 Run simple python server on server.
 NOTE: Always run the python server on the port 9999 (according to the RYU code)
 ```
@@ -358,6 +370,7 @@ Run simple python server on router
 ```
 sudo docker exec router python -m http.server 9988
 ```
+
 Now if you will do the wget command by the ip of router but the tcp_port on which the server is running, it will be replied by server and not router. You can also verify it on the terminal, from where you got the reply.
 To do the wget command. Run following command in gnbsim
 ```
@@ -368,6 +381,19 @@ And if we give some other tcp_port, it will be replied by router
 wget --bind-address= <UE_ip_address> <router_ip_address>:9988
 ```
 So, you can observe in the terminal(router & server) that even if the ip was same but was answered by differenrt systems.
+
+-->
+In the UE open the terminal (termux app) and use the command wget to reach server. But here, we are performing application based slicing we will "wget" the server with the IP of the router which goes towards the internet but not with the actual IP of the server.
+```
+wget 10.0.0.3:9999 #IP of the router
+```
+Here we have used the Ip of the router,but the port number is ```9999```. ie., if the UE is trying to reach the internet via the port 9999 it can communicate with the server.
+we can observe the logs in the tab where we ran the ```sudo docker exec server python3 -m http.server 9999``` command.
+
+
+
+
+
 
 ## To verify that the UE is going through the router towards the internet
 ```
@@ -392,9 +418,13 @@ to view the stream go to your browser in a pc
 http://192.168.70.141:9080/players/hls.html
 
 ```
-OR
+```OR```
 ```
 http://<CORE_VM IP>:9080/players/hls.html
+```
+```OR```
+```
+http://localhost:9080/players/hls.html
 ```
 
 in mobile phone you have to use astra appl
@@ -412,5 +442,9 @@ sudo docker-compose down
 For shutting down the core
 ```
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
+```
+```OR```
+```
+sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml down
 ```
 
