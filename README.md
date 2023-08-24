@@ -1,6 +1,11 @@
 # 5G-ovs-integration with MEC & slicing capability
 This experiment has been performed by 5G use case lab (5GUCL) IDRBT.
 Requirements: USRP B210, PC with 16GB RAM and a hexacore processor 
+
+![5gedgeslice drawio](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/46845955-9c35-4a38-a7c3-45e2ab810bc1)
+
+
+
 ## Refer these links to setup core in VM and Physical gNB
 In developv4 branch we are using physical devices to test the setup core version v1.5.1, while developv2 and developv3 use simulated environment. 
 In the develop branch we are using version 1.4.0 of OAI core. Here in developv2 and developv3 we are using version 1.5.1 from master branch.
