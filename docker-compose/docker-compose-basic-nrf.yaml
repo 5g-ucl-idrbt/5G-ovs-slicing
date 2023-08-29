@@ -4,7 +4,7 @@ services:
         container_name: "mysql"
         image: mysql:8.0
         volumes:
-            - ./database/oai_db3.sql:/docker-entrypoint-initdb.d/oai_db.sql   #binod Changed oai_db2.sql to oai_db3.sql
+            - ./database/oai_db2.sql:/docker-entrypoint-initdb.d/oai_db.sql   #binod Changed oai_db2.sql to oai_db3.sql
             - ./healthscripts/mysql-healthcheck2.sh:/tmp/mysql-healthcheck.sh
         environment:
             - TZ=Europe/Paris
