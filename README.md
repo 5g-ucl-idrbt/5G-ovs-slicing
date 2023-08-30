@@ -461,6 +461,18 @@ sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml down
 # ----------------------------------------------------------
 #            Secured Banking Slice Demo
 # ----------------------------------------------------------
+## prerequisites
+Before you run for your personalized requirement you have to change : 
+- the port number as well as IP addreses in the RYU code. The path is ```5G-ovs-integration/docker-compose/ryuctrlr
+/automac_UEbind.py```
+![Screenshot 2023-08-30 195724](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/ff4d5d92-df84-4a16-9e30-1c18e45507d7)
+
+![Screenshot 2023-08-30 200439](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/27b785a3-4306-4425-b4a1-05428d9fcc67)
+
+
+![Screenshot 2023-08-30 200500](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/63249daf-773a-4d0e-91dc-d2da6f2efb5a)
+
+
 Make sure you have built the banking-app image using the docker file present in the ```/dockerfiles``` folder
 - run the scenario
 ```
@@ -515,7 +527,7 @@ bash bin/entrypoint.sh
 ```
 ## Testing The Slice
 - Now the very first UE device which latches to the network will latch to the banking security slice.
-- On the first UE device open a browser and go the url http://10.0.0.3:3000 you will be able to get the website and you can use the credentials to check account number: ````713047``` and password: ```abhi123```
+- On the first UE device open a browser and go the url http://10.0.0.3:3000 you will be able to get the website and you can use the credentials to check account number: ```713047``` and password: ```abhi123```
 - Now connect the 2nd UE to the network and try to go to the same url, you will see that the 2nd UE will not fetch the website.
 - Due to slicing we have isolated the 1st UE with the access to the banking portal website
 
