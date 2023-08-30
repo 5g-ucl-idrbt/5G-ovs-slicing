@@ -79,9 +79,9 @@ sudo docker ps -a
 ```
 ```OR```
 For Banking app deployment
-```
+
 Click [Banking Secure Slice](#secured-banking-slice-demo)
-```
+
 ## Run the script file to create bridge, connections and to add IPs & routes 
 ```
 cd oai-cn5g-fed/docker-compose
