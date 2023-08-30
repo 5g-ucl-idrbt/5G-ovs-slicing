@@ -458,4 +458,58 @@ sudo docker compose -f docker-compose-basic-nrf-ovs.yaml down
 ```
 sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml down
 ```
+# ----------------------------------------------------------
+#            Secured Banking Slice Demo
+# ----------------------------------------------------------
+Make sure you have built the banking-app image using the docker file present in the ```/dockerfiles``` folder
+- run the scenario
+```
+cd oai-cn5g-fed/docker-compose
+sudo docker compose -f docker-compose-slicing-bank-nrf.yaml up -d
 
+```
+- Run the slicing setup script
+```
+cd oai-cn5g-fed/docker-compose
+chmod +x run.sh
+sudo ./run.sh
+```
+- Run the slicing code in the RYU controller
+```
+sudo docker exec ryu ryu-manager --observe-links ryu/ryu/app/ryucode.py
+```
+- In a new tab observe the AMF logs To check if the devices are connected to core 
+```
+sudo docker logs --follow oai-amf
+```
+- Commmands to be executed in Core VM in order to connect to the gNB
+```
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -P FORWARD ACCEPT
+sudo ip route add 192.168.71.194 via <GNB Baremetal IP>
+sudo ip route add 12.1.1.0/24 via 192.168.70.134 # Forward packets to Mobiles from external sources
+```
+
+- Setting up gNB
+Clone this repo  and follow the instructions ref: https://github.com/5g-ucl-idrbt/oai-gnodeb-b210
+- Commands to be executed in gNB
+Plug in the USRP B210 in USB 3.0 port
+```
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -P FORWARD ACCEPT
+sudo ip route add 192.168.70.128/26 via <Bridge IP of Core VM>
+```
+To run the gNB docker 
+```
+cd ci-scripts/yaml_files/sa_b200_gnb/
+sudo docker-compose up -d
+```
+To get into the gNB shell
+```
+sudo docker exec -it sa-b200-gnb bash
+```
+```
+bash bin/entrypoint.sh
+/opt/oai-gnb/bin/nr-softmodem -O /opt/oai-gnb/etc/gnb.conf $USE_ADDITIONAL_OPTIONS
+```
+  
