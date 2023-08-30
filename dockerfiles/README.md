@@ -11,3 +11,7 @@ for UBUNTU
 sudo docker build -f Dockerfile.Ubuntu -t ubuntu:latest --network host . 
 ```
 
+for Banking APP
+```
+sudo docker build -fDockerfile.Bankapp -t banking-app --network host .
+```
