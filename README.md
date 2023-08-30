@@ -465,6 +465,27 @@ sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml down
 Before you run for your personalized requirement you have to change : 
 - the port number as well as IP addreses in the RYU code. The path is ```5G-ovs-integration/docker-compose/ryuctrlr
 /automac_UEbind.py```
+Change the UE Ip accordingly which you want in the slice & change the port according to the servers hosted port
+```
+   Line 80: if (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).dst_port == 9999 and pkt.get_protocol(ipv4.ipv4).src=="12.1.1.2"):     #### change the UE Ip accordingly which you want in the slice & change the port according to the servers hosted port ####
+```
+Change the IP of the server (you also have to change the ip in the run.sh file)
+```
+Line 91: parser.OFPActionSetField(ipv4_dst="10.0.0.2"),    ### change the IP of the server (you also have to change the ip in the run.sh file) ###
+```
+Change the port according to the servers hosted port
+```
+Line 98: elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port == 9999): ### change the port according to the servers hosted port ###
+```
+Change the IP of the router (you also have to change the ip in the run.sh file)
+```
+Line 108: parser.OFPActionSetField(ipv4_src="10.0.0.3"),  ### change the IP of the router (you also have to change the ip in the run.sh file) ###
+```
+Change the port according to the servers hosted port
+```
+Line 115: elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port != 9999 and pkt.get_protocol(tcp.tcp).dst_port != 9999):   ### change the port according to the servers hosted port ###
+```
+<!--
 ![Screenshot 2023-08-30 195724](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/ff4d5d92-df84-4a16-9e30-1c18e45507d7)
 
 ![Screenshot 2023-08-30 200439](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/27b785a3-4306-4425-b4a1-05428d9fcc67)
@@ -472,7 +493,7 @@ Before you run for your personalized requirement you have to change :
 
 ![Screenshot 2023-08-30 200500](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/63249daf-773a-4d0e-91dc-d2da6f2efb5a)
 
-
+-->
 Make sure you have built the banking-app image using the docker file present in the ```/dockerfiles``` folder
 - run the scenario
 ```
