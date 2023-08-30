@@ -461,7 +461,7 @@ sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml down
 # ----------------------------------------------------------
 #            Secured Banking Slice Demo
 # ----------------------------------------------------------
-## prerequisites
+## Prerequisites
 Before you run for your personalized requirement you have to change : 
 - the port number as well as IP addreses in the RYU code. The path is ```5G-ovs-integration/docker-compose/ryuctrlr
 /automac_UEbind.py```
