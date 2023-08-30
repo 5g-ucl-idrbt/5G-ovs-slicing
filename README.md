@@ -66,20 +66,21 @@ sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
 ```
 # Running the Core
 ```
-cd oai-cn5g-fed/docker-compose
+cd 5G-ovs-integration/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
 ```OR```
 If you want to use the speed testerserver as well as the rtmp server you can use these commands
 ```
-cd oai-cn5g-fed/docker-compose
+cd 5G-ovs-integration/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml up -d
 sudo docker ps -a
 ```
 ```OR```
 Banking app deployment
 ```
+cd 5G-ovs-integration/docker-compose
 sudo docker compose -f docker-compose-slicing-bank-nrf.yaml up -d
 ```
 ## Run the script file to create bridge, connections and to add IPs & routes 
@@ -513,17 +514,20 @@ sudo docker exec -it sa-b200-gnb bash
 bash bin/entrypoint.sh
 /opt/oai-gnb/bin/nr-softmodem -O /opt/oai-gnb/etc/gnb.conf $USE_ADDITIONAL_OPTIONS
 ```
+## Testing The Slice
 - Now the very first UE device which latches to the network will latch to the banking security slice.
 - On the first UE device open a browser and go the url http://10.0.0.3:3000 you will be able to get the website and you can use the credentials to check account number: ````713047``` and password: ```abhi123```
 - Now connect the 2nd UE to the network and try to go to the same url, you will see that the 2nd UE will not fetch the website.
 - Due to slicing we have isolated the 1st UE with the access to the banking portal website
 
-- To down the setup
-  In Core pc
-  ```
-
-  ```
-  In gNB PC
-  ```
-
-  ```
+## To down the setup
+In Core pc
+```
+cd 5G-ovs-integration/docker-compose
+sudo docker compose -f docker-compose-slicing-bank-nrf.yaml down
+```
+In gNB PC
+```
+cd ci-scripts/yaml_files/sa_b200_gnb/
+sudo docker-compose down
+```
