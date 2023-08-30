@@ -490,7 +490,7 @@ sudo ip route add 192.168.71.194 via <GNB Baremetal IP>
 sudo ip route add 12.1.1.0/24 via 192.168.70.134 # Forward packets to Mobiles from external sources
 ```
 
-- Setting up gNB
+- Setting up gNB in a diffrent PC
 Clone this repo  and follow the instructions ref: https://github.com/5g-ucl-idrbt/oai-gnodeb-b210
 - Commands to be executed in gNB
 Plug in the USRP B210 in USB 3.0 port
@@ -499,17 +499,31 @@ sudo sysctl net.ipv4.ip_forward=1
 sudo iptables -P FORWARD ACCEPT
 sudo ip route add 192.168.70.128/26 via <Bridge IP of Core VM>
 ```
-To run the gNB docker 
+- To run the gNB docker 
 ```
 cd ci-scripts/yaml_files/sa_b200_gnb/
 sudo docker-compose up -d
 ```
-To get into the gNB shell
+- To get into the gNB shell
 ```
 sudo docker exec -it sa-b200-gnb bash
 ```
+- Execute the commands to run the gNB
 ```
 bash bin/entrypoint.sh
 /opt/oai-gnb/bin/nr-softmodem -O /opt/oai-gnb/etc/gnb.conf $USE_ADDITIONAL_OPTIONS
 ```
-  
+- Now the very first UE device which latches to the network will latch to the banking security slice.
+- On the first UE device open a browser and go the url http://10.0.0.3:3000 you will be able to get the website and you can use the credentials to check account number: ````713047``` and password: ```abhi123```
+- Now connect the 2nd UE to the network and try to go to the same url, you will see that the 2nd UE will not fetch the website.
+- Due to slicing we have isolated the 1st UE with the access to the banking portal website
+
+- To down the setup
+  In Core pc
+  ```
+
+  ```
+  In gNB PC
+  ```
+
+  ```
