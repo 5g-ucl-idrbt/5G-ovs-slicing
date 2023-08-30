@@ -78,10 +78,9 @@ sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml up -d
 sudo docker ps -a
 ```
 ```OR```
-Banking app deployment
+For Banking app deployment
 ```
-cd 5G-ovs-integration/docker-compose
-sudo docker compose -f docker-compose-slicing-bank-nrf.yaml up -d
+Click [Banking Secure Slice](#secured-banking-slice-demo)
 ```
 ## Run the script file to create bridge, connections and to add IPs & routes 
 ```
