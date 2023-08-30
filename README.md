@@ -70,12 +70,17 @@ cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
-OR
+```OR```
 If you want to use the speed testerserver as well as the rtmp server you can use these commands
 ```
 cd oai-cn5g-fed/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml up -d
 sudo docker ps -a
+```
+```OR```
+Banking app deployment
+```
+sudo docker compose -f docker-compose-slicing-bank-nrf.yaml up -d
 ```
 ## Run the script file to create bridge, connections and to add IPs & routes 
 ```
