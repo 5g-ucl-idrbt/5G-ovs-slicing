@@ -77,7 +77,7 @@ class TrafficSlicing(app_manager.RyuApp):
         src_mac = eth.src
         
         
-        if (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).dst_port == 9999 and pkt.get_protocol(ipv4.ipv4).src=="12.1.1.2"):     ####### change the UE Ip accordingly#########
+        if (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).dst_port == 9999 and pkt.get_protocol(ipv4.ipv4).src=="12.1.1.2"):     #### change the UE Ip accordingly which you want in the slice & change the port according to the servers hosted port ####
             port = pkt.get_protocol(tcp.tcp).dst_port
             match = datapath.ofproto_parser.OFPMatch(
                 in_port=in_port,
@@ -88,14 +88,14 @@ class TrafficSlicing(app_manager.RyuApp):
             )
 
             actions = [
-                parser.OFPActionSetField(ipv4_dst="10.0.0.2"),
+                parser.OFPActionSetField(ipv4_dst="10.0.0.2"),    ### change the IP of the server (you also have to change the ip in the run.sh file) ###
                 parser.OFPActionSetField(eth_dst=dst_mac),
                 parser.OFPActionOutput(self.mac_to_port[dst_mac])
             ]
             self.add_flow(datapath, 2, match, actions)
             self._send_package(msg, datapath, in_port, actions)
             
-        elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port == 9999):
+        elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port == 9999): ### change the port according to the servers hosted port ###
             match = datapath.ofproto_parser.OFPMatch(
                 in_port=in_port,
                 eth_type=ether_types.ETH_TYPE_IP,
@@ -105,14 +105,14 @@ class TrafficSlicing(app_manager.RyuApp):
             )
 
             actions = [
-                parser.OFPActionSetField(ipv4_src="10.0.0.3"),
+                parser.OFPActionSetField(ipv4_src="10.0.0.3"),  ### change the IP of the router (you also have to change the ip in the run.sh file) ###
                 parser.OFPActionSetField(eth_src=src_mac),
                 parser.OFPActionOutput(self.mac_to_port[dst_mac])
             ]
             self.add_flow(datapath, 2, match, actions)
             self._send_package(msg, datapath, in_port, actions)
             
-        elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port != 9999 and pkt.get_protocol(tcp.tcp).dst_port != 9999):
+        elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port != 9999 and pkt.get_protocol(tcp.tcp).dst_port != 9999):   ### change the port according to the servers hosted port ###
             out_port = self.mac_to_port[dst_mac]
 
             match = datapath.ofproto_parser.OFPMatch(
