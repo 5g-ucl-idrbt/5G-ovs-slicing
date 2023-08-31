@@ -1,9 +1,10 @@
 # 5G-ovs-integration with MEC & slicing capability
 This experiment has been performed by 5G use case lab (5GUCL) IDRBT.
 Requirements: USRP B210, PC with 16GB RAM and a hexacore processor 
-
+<!--
 ![5gedge drawio](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/55aef223-125f-4115-ac3d-8fb8d261ef38)
-
+-->
+![5gedge drawio(1)](https://github.com/5g-ucl-idrbt/5G-ovs-integration/assets/46273637/d3b1d366-489c-4edb-9261-9ec36f780e1a)
 
 
 
