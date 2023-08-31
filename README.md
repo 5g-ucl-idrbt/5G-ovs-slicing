@@ -551,7 +551,8 @@ bash bin/entrypoint.sh
 - On the first UE device open a browser and go the url http://10.0.0.3:3000 you will be able to get the website and you can use the credentials to check account number: ```713047``` and password: ```abhi123```
 - Now connect the 2nd UE to the network and try to go to the same url, you will see that the 2nd UE will not fetch the website.
 - Due to slicing we have isolated the 1st UE with the access to the banking portal website
-
+## Observation
+Even if the server is being hosted on 10.0.0.2:3000 the UE is able to access the server via 10.0.0.3:3000 which is the ip of the router which is going towards the internet. Here, we have isolated the server on the network layer level.
 ## To down the setup
 In Core pc
 ```
