@@ -498,7 +498,7 @@ Line 115: elif (pkt.get_protocol(tcp.tcp) and pkt.get_protocol(tcp.tcp).src_port
 Make sure you have built the banking-app image using the docker file present in the ```/dockerfiles``` folder
 - run the scenario
 ```
-cd oai-cn5g-fed/docker-compose
+cd 5G-ovs-integration/docker-compose
 sudo docker compose -f docker-compose-slicing-bank-nrf.yaml up -d
 
 ```
