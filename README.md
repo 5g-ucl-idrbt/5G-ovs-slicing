@@ -22,11 +22,11 @@ git clone https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed.git
 Clone the repo and paste the docker-compose file and createLink.sh file in the oai-cn5g-fed/docker-compose path
 ```
 cd
-git clone https://github.com/abhic137/5G-ovs-integration.git
-cd 5G-ovs-integration
+git clone https://github.com/abhic137/5G-ovs-slicing.git
+cd 5G-ovs-slicing
 git branch -a
 git checkout developv4
-cd 5G-ovs-integration/docker-compose
+cd 5G-ovs-slicing/docker-compose
 cp run.sh createLink.sh docker-compose-basic-nrf-ovs.yaml ~/oai-cn5g-fed/docker-compose
 cp oai_db3.sql ~/oai-cn5g-fed/docker-compose/database
 
@@ -36,7 +36,7 @@ cp oai_db3.sql ~/oai-cn5g-fed/docker-compose/database
 ## Clone the repo
 ```
 cd
-git clone https://github.com/5g-ucl-idrbt/5G-ovs-integration.git
+git clone https://github.com/5g-ucl-idrbt/5G-ovs-slicing.git
 git branch -a
 git checkout developv4
 ```
@@ -67,14 +67,14 @@ sudo docker tag openvswitch/ovs:2.11.2_debian openvswitch/ovs:latest
 ```
 # Running the Core
 ```
-cd 5G-ovs-integration/docker-compose
+cd 5G-ovs-slicing/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs.yaml up -d
 sudo docker ps -a
 ```
 ```OR```
 If you want to use the speed testerserver as well as the rtmp server you can use these commands
 ```
-cd 5G-ovs-integration/docker-compose
+cd 5G-ovs-slicing/docker-compose
 sudo docker compose -f docker-compose-basic-nrf-ovs-streaming.yaml up -d
 sudo docker ps -a
 ```
